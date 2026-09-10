@@ -16,6 +16,8 @@ pub fn property_xml(String, String) -> String raise DavError
 
 pub fn propfind(String, Int, Array[String]) -> Request raise DavError
 
+pub fn proppatch(String, Array[(String, String)]) -> Request raise DavError
+
 // Errors
 pub suberror DavError {
   Invalid(String)
