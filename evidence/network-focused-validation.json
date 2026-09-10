@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-10T13:54:53.338Z",
+  "passed": 5,
+  "results": [
+    {
+      "name": "binary file lifecycle, Unicode paths, conditional writes, copy/move and metadata",
+      "passed": true
+    },
+    {
+      "name": "MoonBit multistatus parser receives live HTTP body",
+      "passed": true
+    },
+    {
+      "name": "authentication and redirects return errors without replay",
+      "passed": true
+    },
+    {
+      "name": "timeout, cancellation, response bound and truncated stream",
+      "passed": true
+    },
+    {
+      "name": "invalid request parameters never reach server",
+      "passed": true
+    }
+  ],
+  "server": "local purpose-built HTTP fixture",
+  "independentServer": false,
+  "tlsTested": false
+}

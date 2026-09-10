@@ -26,6 +26,8 @@ try {
   $engine=Get-ChildItem '_build/js' -Recurse -File | Where-Object { $_.Name -in @('main.js','web.js') -and $_.FullName -match '[\\/]cmd[\\/]web[\\/]' } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
   if (-not $engine) {throw 'Missing browser engine'}
   Copy-Item -LiteralPath $engine.FullName -Destination 'web/engine.mjs' -Force
+  node tools/test-network.mjs
+  if ($LASTEXITCODE -ne 0) {throw 'network tests failed'}
   node tools/test-demo.mjs
   if ($LASTEXITCODE -ne 0) {throw 'browser engine test failed'}
   node tools/test-cli.mjs

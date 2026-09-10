@@ -29,20 +29,20 @@ pub(all) struct Property {
   name : String
   value : String
   status : Int
-} derive(Eq, @debug.Debug)
+} derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct Request {
   verb : String
   target : String
   headers : Map[String, String]
   body : String
-} derive(Eq, @debug.Debug)
+} derive(Eq, ToJson, @debug.Debug)
 
 pub(all) struct Resource {
   href : String
   status : Int?
   properties : Array[Property]
-} derive(Eq, @debug.Debug)
+} derive(Eq, ToJson, @debug.Debug)
 
 // Type aliases
 

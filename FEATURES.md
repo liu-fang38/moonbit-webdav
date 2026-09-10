@@ -6,7 +6,7 @@
 
 ## 尚未达到上游的部分
 
-只构建/解析协议；没有 HTTP/TLS/认证传输与真实服务器互操作。已有基础能力参见 README 与生成的 `pkg.generated.mbti`。
+已有 Node HTTP(S)/Basic/Bearer 与文件操作；尚缺独立服务器互操作、Digest、锁和流式大文件。已有基础能力参见 README 与生成的 `pkg.generated.mbti`。
 
 ## 工程交付范围
 

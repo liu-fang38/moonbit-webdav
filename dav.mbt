@@ -9,7 +9,7 @@ pub(all) struct Request {
   target : String
   headers : Map[String, String]
   body : String
-} derive(Debug, Eq)
+} derive(Debug, Eq, ToJson)
 
 ///|
 pub(all) struct Property {
@@ -17,14 +17,14 @@ pub(all) struct Property {
   name : String
   value : String
   status : Int
-} derive(Debug, Eq)
+} derive(Debug, Eq, ToJson)
 
 ///|
 pub(all) struct Resource {
   href : String
   status : Int?
   properties : Array[Property]
-} derive(Debug, Eq)
+} derive(Debug, Eq, ToJson)
 
 ///|
 fn escape(s : String) -> String {
