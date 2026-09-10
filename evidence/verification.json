@@ -1,0 +1,49 @@
+{
+  "project": "webdav",
+  "checks": [
+    {
+      "command": "moon fmt",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 4 tasks, now up to date\n",
+      "utc": "2026-09-10T06:05:25.257846+00:00"
+    },
+    {
+      "command": "moon info",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 2 tasks, now up to date\n",
+      "utc": "2026-09-10T06:05:25.459917+00:00"
+    },
+    {
+      "command": "moon check --deny-warn",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 4 tasks, now up to date\n",
+      "utc": "2026-09-10T06:05:25.883554+00:00"
+    },
+    {
+      "command": "moon test --target wasm-gc --deny-warn",
+      "exit_code": 0,
+      "output": "Total tests: 8, passed: 8, failed: 0.\n",
+      "utc": "2026-09-10T06:05:26.440665+00:00"
+    },
+    {
+      "command": "moon test --target js --deny-warn",
+      "exit_code": 0,
+      "output": "Total tests: 8, passed: 8, failed: 0.\n",
+      "utc": "2026-09-10T06:05:27.536885+00:00"
+    },
+    {
+      "command": "moon build --target js --deny-warn",
+      "exit_code": 0,
+      "output": "Finished. moon: ran 5 tasks, now up to date\n",
+      "utc": "2026-09-10T06:05:28.808974+00:00"
+    },
+    {
+      "command": "moon run cmd/main",
+      "exit_code": 0,
+      "output": "[\n  {\n    href: \"/notes/a.txt\",\n    status: None,\n    properties: [\n      { uri: \"DAV:\", name: \"getcontentlength\", value: \"42\", status: 200 },\n      { uri: \"DAV:\", name: \"displayname\", value: \"笔记\", status: 200 },\n    ],\n  },\n]\n",
+      "utc": "2026-09-10T06:05:29.468253+00:00"
+    }
+  ],
+  "demo": "[\n  {\n    href: \"/notes/a.txt\",\n    status: None,\n    properties: [\n      { uri: \"DAV:\", name: \"getcontentlength\", value: \"42\", status: 200 },\n      { uri: \"DAV:\", name: \"displayname\", value: \"笔记\", status: 200 },\n    ],\n  },\n]",
+  "source_lines": 437
+}

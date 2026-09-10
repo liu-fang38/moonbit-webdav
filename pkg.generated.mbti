@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "localreview/webdav"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn copy_move(String, String, String, Bool) -> Request raise DavError
+
+pub fn parse_multistatus(String) -> Array[Resource] raise DavError
+
+pub fn path(String) -> String raise DavError
+
+pub fn property_xml(String, String) -> String raise DavError
+
+pub fn propfind(String, Int, Array[String]) -> Request raise DavError
+
+// Errors
+pub suberror DavError {
+  Invalid(String)
+} derive(@debug.Debug)
+
+// Types and methods
+pub(all) struct Property {
+  uri : String
+  name : String
+  value : String
+  status : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Request {
+  verb : String
+  target : String
+  headers : Map[String, String]
+  body : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Resource {
+  href : String
+  status : Int?
+  properties : Array[Property]
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

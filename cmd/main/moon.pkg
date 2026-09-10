@@ -1,0 +1,5 @@
+import {
+  "localreview/webdav" @lib,
+}
+
+pkgtype(kind: "executable")
