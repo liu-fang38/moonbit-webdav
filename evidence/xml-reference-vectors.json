@@ -1,0 +1,4479 @@
+{
+  "oracle": "Python stdlib xml.etree.ElementTree",
+  "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+  "cases": [
+    {
+      "source": "<r/>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [],
+        "content": []
+      }
+    },
+    {
+      "source": "<r>before<b/>after<c>nested</c>end</r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [],
+        "content": [
+          "before",
+          {
+            "uri": "",
+            "name": "b",
+            "attributes": [],
+            "content": []
+          },
+          "after",
+          {
+            "uri": "",
+            "name": "c",
+            "attributes": [],
+            "content": [
+              "nested"
+            ]
+          },
+          "end"
+        ]
+      }
+    },
+    {
+      "source": "<?xml version=\"1.0\"?><r a=\"&lt;&gt;&amp;&quot;&apos;\">&#x1F600;&#65;</r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "",
+            "name": "a",
+            "value": "<>&\"'"
+          }
+        ],
+        "content": [
+          "😀A"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"u\" xmlns:p=\"v\"><p:x a=\"1\" p:a=\"2\" xmlns:p=\"w\"/><z xmlns=\"\"/></r>",
+      "root": {
+        "uri": "u",
+        "name": "r",
+        "attributes": [],
+        "content": [
+          {
+            "uri": "w",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "",
+                "name": "a",
+                "value": "1"
+              },
+              {
+                "uri": "w",
+                "name": "a",
+                "value": "2"
+              }
+            ],
+            "content": []
+          },
+          {
+            "uri": "",
+            "name": "z",
+            "attributes": [],
+            "content": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "<r xml:lang=\"zh\">a<!-- ignored -->b<?instruction ignored?>c<![CDATA[<raw>&]]>d</r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "http://www.w3.org/XML/1998/namespace",
+            "name": "lang",
+            "value": "zh"
+          }
+        ],
+        "content": [
+          "abc<raw>&d"
+        ]
+      }
+    },
+    {
+      "source": "<r a=\"a\r\nb\tc&#9;&#10;&#13;\">a\r\nb\rc</r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "",
+            "name": "a",
+            "value": "a b c\t\n\r"
+          }
+        ],
+        "content": [
+          "a\nb\nc"
+        ]
+      }
+    },
+    {
+      "source": "﻿<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><中文 属性=\"好\">世界</中文>",
+      "root": {
+        "uri": "",
+        "name": "中文",
+        "attributes": [
+          {
+            "uri": "",
+            "name": "属性",
+            "value": "好"
+          }
+        ],
+        "content": [
+          "世界"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns:p=\"u\"><x xmlns:p=\"v\"><p:y/></x><p:z/></r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [],
+        "content": [
+          {
+            "uri": "",
+            "name": "x",
+            "attributes": [],
+            "content": [
+              {
+                "uri": "v",
+                "name": "y",
+                "attributes": [],
+                "content": []
+              }
+            ]
+          },
+          {
+            "uri": "u",
+            "name": "z",
+            "attributes": [],
+            "content": []
+          }
+        ]
+      }
+    },
+    {
+      "source": "<xml:r xml:space=\"preserve\"/>",
+      "root": {
+        "uri": "http://www.w3.org/XML/1998/namespace",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "http://www.w3.org/XML/1998/namespace",
+            "name": "space",
+            "value": "preserve"
+          }
+        ],
+        "content": []
+      }
+    },
+    {
+      "source": "<r>&#9;&#10;&#13;&#32;&#xD7FF;&#xE000;&#xFFFD;&#x10000;&#x10FFFF;</r>",
+      "root": {
+        "uri": "",
+        "name": "r",
+        "attributes": [],
+        "content": [
+          "\t\n\r ퟿�𐀀􏿿"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:0\" xmlns:p=\"urn:attribute\" p:a=\"0\" plain=\"&#9;\">&#x1F600;&#13;中&#x1F600;&#x1F600;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:0",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "0"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀\r中😀😀😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:1\" xmlns:p=\"urn:attribute\" p:a=\"1\" plain=\"&#9;\">&#x1F600;&#x1F600;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:1",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "1"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀😀😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:2\" xmlns:p=\"urn:attribute\" p:a=\"2\" plain=\"&#9;\">&amp;<![CDATA[<&]]>&#x1F600;&#13;&#x1F600;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:2",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "2"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&<&😀\r😀<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:3\" xmlns:p=\"urn:attribute\" p:a=\"3\" plain=\"&#9;\">x中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:3",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "3"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:4\" xmlns:p=\"urn:attribute\" p:a=\"4\" plain=\"&#9;\">&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:4",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "4"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:5\" xmlns:p=\"urn:attribute\" p:a=\"5\" plain=\"&#9;\">&#13;x&amp;x&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:5",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "5"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\rx&x😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:6\" xmlns:p=\"urn:attribute\" p:a=\"6\" plain=\"&#9;\">x&#13;&amp;&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:6",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "6"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x\r&&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:7\" xmlns:p=\"urn:attribute\" p:a=\"7\" plain=\"&#9;\">&#x1F600;<![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:7",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "7"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:8\" xmlns:p=\"urn:attribute\" p:a=\"8\" plain=\"&#9;\"><![CDATA[<&]]><![CDATA[<&]]>中<![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:8",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "8"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&<&中<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:9\" xmlns:p=\"urn:attribute\" p:a=\"9\" plain=\"&#9;\">&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:9",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "9"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:10\" xmlns:p=\"urn:attribute\" p:a=\"10\" plain=\"&#9;\">中&amp;<![CDATA[<&]]>中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:10",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "10"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中&<&中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:11\" xmlns:p=\"urn:attribute\" p:a=\"11\" plain=\"&#9;\">x&#x1F600;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:11",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "11"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x😀\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:12\" xmlns:p=\"urn:attribute\" p:a=\"12\" plain=\"&#9;\"><![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:12",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "12"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:13\" xmlns:p=\"urn:attribute\" p:a=\"13\" plain=\"&#9;\">x&#x1F600;中&amp;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:13",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "13"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x😀中&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:14\" xmlns:p=\"urn:attribute\" p:a=\"14\" plain=\"&#9;\">&#13;中中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:14",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "14"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:15\" xmlns:p=\"urn:attribute\" p:a=\"15\" plain=\"&#9;\">中&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:15",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "15"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:16\" xmlns:p=\"urn:attribute\" p:a=\"16\" plain=\"&#9;\">&amp;&amp;&#13;x&#13;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:16",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "16"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&&\rx\rx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:17\" xmlns:p=\"urn:attribute\" p:a=\"17\" plain=\"&#9;\">x中&amp;中&#13;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:17",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "17"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x中&中\r😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:18\" xmlns:p=\"urn:attribute\" p:a=\"18\" plain=\"&#9;\">中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:18",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "18"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:19\" xmlns:p=\"urn:attribute\" p:a=\"19\" plain=\"&#9;\">&#13;中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:19",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "19"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:20\" xmlns:p=\"urn:attribute\" p:a=\"20\" plain=\"&#9;\">中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:20",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "20"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:21\" xmlns:p=\"urn:attribute\" p:a=\"21\" plain=\"&#9;\">&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:21",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "21"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:22\" xmlns:p=\"urn:attribute\" p:a=\"22\" plain=\"&#9;\">&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:22",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "22"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:23\" xmlns:p=\"urn:attribute\" p:a=\"23\" plain=\"&#9;\">中中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:23",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "23"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:24\" xmlns:p=\"urn:attribute\" p:a=\"24\" plain=\"&#9;\">中&#13;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:24",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "24"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中\r\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:25\" xmlns:p=\"urn:attribute\" p:a=\"25\" plain=\"&#9;\">&#13;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:25",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "25"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\rx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:26\" xmlns:p=\"urn:attribute\" p:a=\"26\" plain=\"&#9;\">&#x1F600;&amp;&amp;中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:26",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "26"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀&&中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:27\" xmlns:p=\"urn:attribute\" p:a=\"27\" plain=\"&#9;\">&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:27",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "27"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:28\" xmlns:p=\"urn:attribute\" p:a=\"28\" plain=\"&#9;\">中&amp;&amp;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:28",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "28"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中&&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:29\" xmlns:p=\"urn:attribute\" p:a=\"29\" plain=\"&#9;\"><![CDATA[<&]]><![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:29",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "29"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:30\" xmlns:p=\"urn:attribute\" p:a=\"30\" plain=\"&#9;\">&amp;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:30",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "30"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:31\" xmlns:p=\"urn:attribute\" p:a=\"31\" plain=\"&#9;\">中&#x1F600;&#13;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:31",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "31"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中😀\rx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:32\" xmlns:p=\"urn:attribute\" p:a=\"32\" plain=\"&#9;\">&#13;&amp;&#x1F600;<![CDATA[<&]]>&#x1F600;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:32",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "32"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r&😀<&😀x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:33\" xmlns:p=\"urn:attribute\" p:a=\"33\" plain=\"&#9;\">&#x1F600;&#x1F600;中x&#13;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:33",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "33"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀😀中x\r&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:34\" xmlns:p=\"urn:attribute\" p:a=\"34\" plain=\"&#9;\">&amp;&#13;&#x1F600;&#13;<![CDATA[<&]]><![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:34",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "34"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&\r😀\r<&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:35\" xmlns:p=\"urn:attribute\" p:a=\"35\" plain=\"&#9;\">&#13;&#x1F600;&#13;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:35",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "35"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r😀\r\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:36\" xmlns:p=\"urn:attribute\" p:a=\"36\" plain=\"&#9;\">&#x1F600;&#13;&#13;中&amp;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:36",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "36"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀\r\r中&中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:37\" xmlns:p=\"urn:attribute\" p:a=\"37\" plain=\"&#9;\">中&#x1F600;&#x1F600;<![CDATA[<&]]>&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:37",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "37"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中😀😀<&&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:38\" xmlns:p=\"urn:attribute\" p:a=\"38\" plain=\"&#9;\">&#13;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:38",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "38"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:39\" xmlns:p=\"urn:attribute\" p:a=\"39\" plain=\"&#9;\">&#13;x&#13;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:39",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "39"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\rx\r<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:40\" xmlns:p=\"urn:attribute\" p:a=\"40\" plain=\"&#9;\"><![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:40",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "40"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:41\" xmlns:p=\"urn:attribute\" p:a=\"41\" plain=\"&#9;\">中中&#13;&#13;中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:41",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "41"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中中\r\r中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:42\" xmlns:p=\"urn:attribute\" p:a=\"42\" plain=\"&#9;\">&#x1F600;&#x1F600;<![CDATA[<&]]>中&amp;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:42",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "42"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀😀<&中&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:43\" xmlns:p=\"urn:attribute\" p:a=\"43\" plain=\"&#9;\">&amp;<![CDATA[<&]]>&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:43",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "43"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&<&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:44\" xmlns:p=\"urn:attribute\" p:a=\"44\" plain=\"&#9;\">&#x1F600;<![CDATA[<&]]>x&#x1F600;x<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:44",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "44"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀<&x😀x<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:45\" xmlns:p=\"urn:attribute\" p:a=\"45\" plain=\"&#9;\">x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:45",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "45"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:46\" xmlns:p=\"urn:attribute\" p:a=\"46\" plain=\"&#9;\">&amp;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:46",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "46"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:47\" xmlns:p=\"urn:attribute\" p:a=\"47\" plain=\"&#9;\"><![CDATA[<&]]>&#13;<![CDATA[<&]]><![CDATA[<&]]>&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:47",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "47"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&\r<&<&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:48\" xmlns:p=\"urn:attribute\" p:a=\"48\" plain=\"&#9;\">&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:48",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "48"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:49\" xmlns:p=\"urn:attribute\" p:a=\"49\" plain=\"&#9;\">&#13;&#x1F600;&amp;中中&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:49",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "49"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r😀&中中\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:50\" xmlns:p=\"urn:attribute\" p:a=\"50\" plain=\"&#9;\">&#x1F600;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:50",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "50"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:51\" xmlns:p=\"urn:attribute\" p:a=\"51\" plain=\"&#9;\">&#x1F600;&#x1F600;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:51",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "51"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀😀&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:52\" xmlns:p=\"urn:attribute\" p:a=\"52\" plain=\"&#9;\">中x&amp;<![CDATA[<&]]>&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:52",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "52"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中x&<&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:53\" xmlns:p=\"urn:attribute\" p:a=\"53\" plain=\"&#9;\">&#x1F600;x&amp;x中&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:53",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "53"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀x&x中\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:54\" xmlns:p=\"urn:attribute\" p:a=\"54\" plain=\"&#9;\">&#x1F600;&#13;&amp;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:54",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "54"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀\r&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:55\" xmlns:p=\"urn:attribute\" p:a=\"55\" plain=\"&#9;\">&#13;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:55",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "55"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:56\" xmlns:p=\"urn:attribute\" p:a=\"56\" plain=\"&#9;\">&#x1F600;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:56",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "56"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:57\" xmlns:p=\"urn:attribute\" p:a=\"57\" plain=\"&#9;\"><![CDATA[<&]]>&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:57",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "57"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:58\" xmlns:p=\"urn:attribute\" p:a=\"58\" plain=\"&#9;\">&#13;&#13;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:58",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "58"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r\rx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:59\" xmlns:p=\"urn:attribute\" p:a=\"59\" plain=\"&#9;\">&#x1F600;&amp;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:59",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "59"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:60\" xmlns:p=\"urn:attribute\" p:a=\"60\" plain=\"&#9;\">中&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:60",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "60"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:61\" xmlns:p=\"urn:attribute\" p:a=\"61\" plain=\"&#9;\">中x中&#x1F600;&#13;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:61",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "61"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中x中😀\r😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:62\" xmlns:p=\"urn:attribute\" p:a=\"62\" plain=\"&#9;\"><![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:62",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "62"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:63\" xmlns:p=\"urn:attribute\" p:a=\"63\" plain=\"&#9;\">&#x1F600;&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:63",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "63"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:64\" xmlns:p=\"urn:attribute\" p:a=\"64\" plain=\"&#9;\">中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:64",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "64"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:65\" xmlns:p=\"urn:attribute\" p:a=\"65\" plain=\"&#9;\">&#x1F600;中&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:65",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "65"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀中😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:66\" xmlns:p=\"urn:attribute\" p:a=\"66\" plain=\"&#9;\">&#x1F600;x<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:66",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "66"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀x<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:67\" xmlns:p=\"urn:attribute\" p:a=\"67\" plain=\"&#9;\">&#13;&amp;x&amp;x&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:67",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "67"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r&x&x😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:68\" xmlns:p=\"urn:attribute\" p:a=\"68\" plain=\"&#9;\"><![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:68",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "68"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:69\" xmlns:p=\"urn:attribute\" p:a=\"69\" plain=\"&#9;\">&#13;中x&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:69",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "69"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中x\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:70\" xmlns:p=\"urn:attribute\" p:a=\"70\" plain=\"&#9;\">&#13;&amp;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:70",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "70"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:71\" xmlns:p=\"urn:attribute\" p:a=\"71\" plain=\"&#9;\">中x<![CDATA[<&]]>x&#x1F600;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:71",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "71"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中x<&x😀中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:72\" xmlns:p=\"urn:attribute\" p:a=\"72\" plain=\"&#9;\">x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:72",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "72"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:73\" xmlns:p=\"urn:attribute\" p:a=\"73\" plain=\"&#9;\">中<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:73",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "73"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:74\" xmlns:p=\"urn:attribute\" p:a=\"74\" plain=\"&#9;\">&#13;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:74",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "74"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:75\" xmlns:p=\"urn:attribute\" p:a=\"75\" plain=\"&#9;\">xx&#13;&amp;中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:75",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "75"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "xx\r&中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:76\" xmlns:p=\"urn:attribute\" p:a=\"76\" plain=\"&#9;\"><![CDATA[<&]]>&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:76",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "76"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:77\" xmlns:p=\"urn:attribute\" p:a=\"77\" plain=\"&#9;\">&#13;<![CDATA[<&]]>中x<![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:77",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "77"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r<&中x<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:78\" xmlns:p=\"urn:attribute\" p:a=\"78\" plain=\"&#9;\">x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:78",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "78"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:79\" xmlns:p=\"urn:attribute\" p:a=\"79\" plain=\"&#9;\"><![CDATA[<&]]>&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:79",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "79"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:80\" xmlns:p=\"urn:attribute\" p:a=\"80\" plain=\"&#9;\">&#x1F600;<![CDATA[<&]]>x&amp;&#13;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:80",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "80"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀<&x&\r中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:81\" xmlns:p=\"urn:attribute\" p:a=\"81\" plain=\"&#9;\">&#13;<![CDATA[<&]]>&amp;&#13;&#13;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:81",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "81"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r<&&\r\r&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:82\" xmlns:p=\"urn:attribute\" p:a=\"82\" plain=\"&#9;\">&#x1F600;&#13;&#13;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:82",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "82"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀\r\r<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:83\" xmlns:p=\"urn:attribute\" p:a=\"83\" plain=\"&#9;\">&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:83",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "83"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:84\" xmlns:p=\"urn:attribute\" p:a=\"84\" plain=\"&#9;\">&#x1F600;中&amp;&#13;xx<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:84",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "84"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀中&\rxx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:85\" xmlns:p=\"urn:attribute\" p:a=\"85\" plain=\"&#9;\">&#x1F600;x&#x1F600;中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:85",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "85"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀x😀中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:86\" xmlns:p=\"urn:attribute\" p:a=\"86\" plain=\"&#9;\"><![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:86",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "86"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:87\" xmlns:p=\"urn:attribute\" p:a=\"87\" plain=\"&#9;\">xxx<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:87",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "87"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "xxx<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:88\" xmlns:p=\"urn:attribute\" p:a=\"88\" plain=\"&#9;\">中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:88",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "88"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:89\" xmlns:p=\"urn:attribute\" p:a=\"89\" plain=\"&#9;\">&#x1F600;中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:89",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "89"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:90\" xmlns:p=\"urn:attribute\" p:a=\"90\" plain=\"&#9;\"><![CDATA[<&]]>中<![CDATA[<&]]><![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:90",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "90"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&中<&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:91\" xmlns:p=\"urn:attribute\" p:a=\"91\" plain=\"&#9;\">&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:91",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "91"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:92\" xmlns:p=\"urn:attribute\" p:a=\"92\" plain=\"&#9;\">&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:92",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "92"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:93\" xmlns:p=\"urn:attribute\" p:a=\"93\" plain=\"&#9;\">&#x1F600;&amp;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:93",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "93"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀&😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:94\" xmlns:p=\"urn:attribute\" p:a=\"94\" plain=\"&#9;\">&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:94",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "94"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:95\" xmlns:p=\"urn:attribute\" p:a=\"95\" plain=\"&#9;\">&amp;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:95",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "95"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:96\" xmlns:p=\"urn:attribute\" p:a=\"96\" plain=\"&#9;\">&amp;x&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:96",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "96"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&x\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:97\" xmlns:p=\"urn:attribute\" p:a=\"97\" plain=\"&#9;\">&amp;&amp;&#13;中&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:97",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "97"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&&\r中&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:98\" xmlns:p=\"urn:attribute\" p:a=\"98\" plain=\"&#9;\">中&amp;x中&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:98",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "98"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中&x中😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:99\" xmlns:p=\"urn:attribute\" p:a=\"99\" plain=\"&#9;\">xx<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:99",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "99"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "xx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:100\" xmlns:p=\"urn:attribute\" p:a=\"100\" plain=\"&#9;\">&#13;x中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:100",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "100"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\rx中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:101\" xmlns:p=\"urn:attribute\" p:a=\"101\" plain=\"&#9;\">&#x1F600;中&#x1F600;&#x1F600;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:101",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "101"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀中😀😀x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:102\" xmlns:p=\"urn:attribute\" p:a=\"102\" plain=\"&#9;\">&#13;&#13;x中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:102",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "102"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r\rx中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:103\" xmlns:p=\"urn:attribute\" p:a=\"103\" plain=\"&#9;\">&amp;x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:103",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "103"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "&x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:104\" xmlns:p=\"urn:attribute\" p:a=\"104\" plain=\"&#9;\">x&amp;&amp;中<![CDATA[<&]]>&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:104",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "104"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x&&中<&\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:105\" xmlns:p=\"urn:attribute\" p:a=\"105\" plain=\"&#9;\"><![CDATA[<&]]><![CDATA[<&]]>中&#x1F600;&#13;&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:105",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "105"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&<&中😀\r\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:106\" xmlns:p=\"urn:attribute\" p:a=\"106\" plain=\"&#9;\">&#x1F600;x&#13;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:106",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "106"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀x\r<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:107\" xmlns:p=\"urn:attribute\" p:a=\"107\" plain=\"&#9;\">中&#13;&#13;&amp;<![CDATA[<&]]><p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:107",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "107"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中\r\r&<&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:108\" xmlns:p=\"urn:attribute\" p:a=\"108\" plain=\"&#9;\">&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:108",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "108"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:109\" xmlns:p=\"urn:attribute\" p:a=\"109\" plain=\"&#9;\">xx&#x1F600;xx<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:109",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "109"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "xx😀xx",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:110\" xmlns:p=\"urn:attribute\" p:a=\"110\" plain=\"&#9;\">xx&#13;&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:110",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "110"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "xx\r😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:111\" xmlns:p=\"urn:attribute\" p:a=\"111\" plain=\"&#9;\">&#13;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:111",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "111"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:112\" xmlns:p=\"urn:attribute\" p:a=\"112\" plain=\"&#9;\">中&amp;中<![CDATA[<&]]>&amp;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:112",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "112"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中&中<&&&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:113\" xmlns:p=\"urn:attribute\" p:a=\"113\" plain=\"&#9;\">中中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:113",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "113"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "中中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:114\" xmlns:p=\"urn:attribute\" p:a=\"114\" plain=\"&#9;\">&#13;中&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:114",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "114"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:115\" xmlns:p=\"urn:attribute\" p:a=\"115\" plain=\"&#9;\">x&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:115",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "115"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "x&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:116\" xmlns:p=\"urn:attribute\" p:a=\"116\" plain=\"&#9;\"><![CDATA[<&]]>中&#x1F600;&#13;中中<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:116",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "116"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "<&中😀\r中中",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:117\" xmlns:p=\"urn:attribute\" p:a=\"117\" plain=\"&#9;\">&#13;&#13;中<![CDATA[<&]]>&#x1F600;&amp;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:117",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "117"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r\r中<&😀&",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:118\" xmlns:p=\"urn:attribute\" p:a=\"118\" plain=\"&#9;\">&#13;中x<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:118",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "118"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "\r中x",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r xmlns=\"urn:119\" xmlns:p=\"urn:attribute\" p:a=\"119\" plain=\"&#9;\">&#x1F600;<p:x xmlns:p=\"urn:child\" xml:lang=\"en\"/>tail</r>",
+      "root": {
+        "uri": "urn:119",
+        "name": "r",
+        "attributes": [
+          {
+            "uri": "urn:attribute",
+            "name": "a",
+            "value": "119"
+          },
+          {
+            "uri": "",
+            "name": "plain",
+            "value": "\t"
+          }
+        ],
+        "content": [
+          "😀",
+          {
+            "uri": "urn:child",
+            "name": "x",
+            "attributes": [
+              {
+                "uri": "http://www.w3.org/XML/1998/namespace",
+                "name": "lang",
+                "value": "en"
+              }
+            ],
+            "content": []
+          },
+          "tail"
+        ]
+      }
+    },
+    {
+      "source": "<r>",
+      "rejected": true
+    },
+    {
+      "source": "<r/><x/>",
+      "rejected": true
+    },
+    {
+      "source": "<r a=\"1\"a=\"2\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r a=\"1\" a=\"2\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r p:a=\"1\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r>&bogus;</r>",
+      "rejected": true
+    },
+    {
+      "source": "<r>&#0;</r>",
+      "rejected": true
+    },
+    {
+      "source": "<r>&#xD800;</r>",
+      "rejected": true
+    },
+    {
+      "source": "<r>&#x110000;</r>",
+      "rejected": true
+    },
+    {
+      "source": "<r a=\"<\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r>]]></r>",
+      "rejected": true
+    },
+    {
+      "source": "<r><!-- a--b --></r>",
+      "rejected": true
+    },
+    {
+      "source": "<1r/>",
+      "rejected": true
+    },
+    {
+      "source": "<r><x></r>",
+      "rejected": true
+    },
+    {
+      "source": "<?xml version=\"&#49;.0\"?><r/>",
+      "rejected": true
+    },
+    {
+      "source": "<r xmlns:p=\"u\" xmlns:q=\"u\" p:a=\"1\" q:a=\"2\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r xmlns:xml=\"wrong\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r xmlns:p=\"http://www.w3.org/XML/1998/namespace\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r xmlns:p=\"\"/>",
+      "rejected": true
+    },
+    {
+      "source": "<r>\u0001</r>",
+      "rejected": true
+    }
+  ],
+  "generatorSha256": "db0e800561efaf3cd524291795be34704b3db234ab7d1c7e04efeec669057430"
+}

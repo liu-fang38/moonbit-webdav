@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-16T17:42:43.710Z",
+  "node": "v24.11.0",
+  "passed": 13,
+  "results": [
+    {
+      "name": "Digest stale retry, independent SHA256 validation, rspauth and nextnonce cache",
+      "passed": true
+    },
+    {
+      "name": "standards-conforming unauthenticated HEAD challenge works",
+      "passed": true
+    },
+    {
+      "name": "wrong password and forever-stale challenges have bounded retries",
+      "passed": true
+    },
+    {
+      "name": "bad server proof and unsupported stream auth-int fail closed",
+      "passed": true
+    },
+    {
+      "name": "stream response retains deadline until body completion",
+      "passed": true
+    },
+    {
+      "name": "stream cancellation and caller destruction reject completion",
+      "passed": true
+    },
+    {
+      "name": "stream uploads enforce exact lengths and byte chunks",
+      "passed": true
+    },
+    {
+      "name": "early 401 disposes stalled source and replays a fresh stream",
+      "passed": true
+    },
+    {
+      "name": "early successful response cannot hide incomplete upload",
+      "passed": true
+    },
+    {
+      "name": "stalled upload timeout and abort release source",
+      "passed": true
+    },
+    {
+      "name": "standard propname body and rich response use scalar optional fields",
+      "passed": true
+    },
+    {
+      "name": "invalid UTF8 XML, incorrect status and mismatched lock token reject",
+      "passed": true
+    },
+    {
+      "name": "invalid stream, header and lock options never reach server",
+      "passed": true
+    }
+  ],
+  "independentServer": false,
+  "sourceSha256": {
+    "tools/client.mjs": "bb36759a88c648571448db2d2524a12ad6906dafe3bad5e08ca2ca00e1cf5d75",
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "tools/test-authoring-client.mjs": "a8d5c8af1f770a9c01b5d86fdd513351f655bbe6c862da8c8f6c37cd57f5c2a4",
+    "web/engine.mjs": "b0be85913f6cb569707f3b19071bc1c2ffee642276a340b090dd69a07b09185c"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-16T17:43:51.495Z",
+  "oracle": "Python stdlib xml.etree.ElementTree",
+  "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+  "passed": 150,
+  "additionalPolicyAndBoundsCases": 6,
+  "sourceSha256": {
+    "xml.mbt": "026e8d391c049ce895676b364a691ba873584fe6fb1b48af093675a40bdd421d",
+    "cmd/web/authoring.mbt": "6fdf2371515c112628a8ce4917878665532acbbc730af2bfe14aa81fe0d8057a",
+    "web/engine.mjs": "b0be85913f6cb569707f3b19071bc1c2ffee642276a340b090dd69a07b09185c",
+    "tools/test-xml-reference.mjs": "ee69a3d7b1243bbb8f9add9cbe009f80cbbe9a4df8d5b73a05f5ece1dbfb9642",
+    "tools/xml-reference.py": "db0e800561efaf3cd524291795be34704b3db234ab7d1c7e04efeec669057430",
+    "evidence/xml-reference-vectors.json": "ba0066dcd520f9dbe59b35985b44e8f9804f1d9b960673a58f4f403c04031701"
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-16T17:42:50.936Z",
+  "node": "v24.11.0",
+  "passed": 17,
+  "results": [
+    {
+      "name": "independently seeded binary bytes through Digest authentication",
+      "passed": true
+    },
+    {
+      "name": "bad credentials and missing credentials fail closed",
+      "passed": true
+    },
+    {
+      "name": "Basic and auto authentication interoperate with independent server",
+      "passed": true
+    },
+    {
+      "name": "mkdirAll, Unicode paths, stat and list preserve metadata",
+      "passed": true
+    },
+    {
+      "name": "conditional write rejects stale ETag without altering file",
+      "passed": true
+    },
+    {
+      "name": "dead properties preserve custom namespaces attributes and mixed XML",
+      "passed": true
+    },
+    {
+      "name": "WsgiDAV propname limitation is rejected; protected-property failures remain observable",
+      "passed": true
+    },
+    {
+      "name": "exclusive lock blocks writes and refresh/token write/unlock succeed",
+      "passed": true
+    },
+    {
+      "name": "depth-infinity parent lock requires token for descendants",
+      "passed": true
+    },
+    {
+      "name": "lock unmapped resource creates an empty locked file",
+      "passed": true
+    },
+    {
+      "name": "shared locks and token-authorized writes interoperate",
+      "passed": true
+    },
+    {
+      "name": "COPY MOVE with tagged source and destination locks",
+      "passed": true
+    },
+    {
+      "name": "stream upload retries Digest with fresh source and verifies filesystem bytes",
+      "passed": true
+    },
+    {
+      "name": "stream download Range preserves partial content status and bytes",
+      "passed": true
+    },
+    {
+      "name": "HTTPS requires trusted certificate and matching hostname",
+      "passed": true
+    },
+    {
+      "name": "collection COPY, MOVE, recursive DELETE and missing-path errors",
+      "passed": true
+    },
+    {
+      "name": "network CLI streams real files and exposes lock lifecycle and failures",
+      "passed": true
+    }
+  ],
+  "server": {
+    "version": "4.3.5",
+    "cheroot": "11.1.2",
+    "cryptography": "50.0.1",
+    "openssl": "OpenSSL 3.0.19 27 Jan 2026",
+    "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+    "sourceSha256": {
+      "wsgidav_app.py": "e4e0a0d7fa937a3bd7cbea38b2ff6c58a0676e59bbcd2cb1cddd1741d1a14259",
+      "request_server.py": "232d1b902668d57eeb2be55cefe89b5b8bb269f169c1ae78bbc363198d8b6203",
+      "http_authenticator.py": "8a32dba71c27c1e27ea0eb748d7a5e65a27bd2b2be3a4eee05b0bc3548137453"
+    }
+  },
+  "independentServer": true,
+  "tlsTested": true,
+  "temporaryServerAndShareRemoved": true,
+  "knownServerLimitations": [
+    "WsgiDAV 4.3.5 recognizes DAV:name instead of RFC4918 DAV:propname; standard propname yields malformed href-only response and is rejected.",
+    "Fresh HEAD Digest authentication returns an illegal response body on 401 with Cheroot 11.1.2; Node rejects HTTP framing. Authentication tests use GET; warmed HEAD is tested.",
+    "Two same-user shared locks require both tokens for writes in this server; cross-user shared-lock semantics remain untested."
+  ],
+  "sourceSha256": {
+    "dav.mbt": "8fd602c56d765db67ace65a94c1d13ff722205d3edd641d6fc3bda755c0bf126",
+    "xml.mbt": "026e8d391c049ce895676b364a691ba873584fe6fb1b48af093675a40bdd421d",
+    "multistatus.mbt": "6cdbe7ebcd2d784c7335afa5afc64aeebd47c317d327e46959010999e6c417b6",
+    "authoring.mbt": "0c245ae0b7509ec4282256d908ed36862e1a4a380817d13fdc85411b565f3eff",
+    "cmd/web/authoring.mbt": "6fdf2371515c112628a8ce4917878665532acbbc730af2bfe14aa81fe0d8057a",
+    "web/engine.mjs": "b0be85913f6cb569707f3b19071bc1c2ffee642276a340b090dd69a07b09185c",
+    "tools/client.mjs": "bb36759a88c648571448db2d2524a12ad6906dafe3bad5e08ca2ca00e1cf5d75",
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "tools/dav.mjs": "86624f1ecb6950d58e8c20cf0f739b4d21a0134e666ec54a6ca0041028f7e5e8",
+    "tools/test-wsgidav.mjs": "4e88559686025e99404d06968d91f680640c66620c442b7c590fe5385436c6d7",
+    "tools/wsgidav-reference.py": "503f0b73f985d0b70182c3fe59ea2316a8be9526e5efc01a9f3334a27c053652"
+  }
+}

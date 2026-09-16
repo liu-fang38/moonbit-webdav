@@ -1,9 +1,9 @@
 name = "localreview/webdav"
 
-version = "0.3.0"
+version = "0.4.0"
 
 license = "MIT"
 
 readme = "README.md"
 
-description = "WebDAV 请求核心本地候选"
+description = "WebDAV XML/authoring core with HTTP(S), Digest, locks and streaming host"

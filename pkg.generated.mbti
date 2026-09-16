@@ -8,7 +8,19 @@ import {
 // Values
 pub fn copy_move(String, String, String, Bool) -> Request raise DavError
 
+pub fn if_resources(Array[(String, Array[String])]) -> String raise DavError
+
+pub fn if_tokens(Array[String]) -> String raise DavError
+
+pub fn lock_request(String, String, depth? : String, timeout? : String, shared? : Bool) -> Request raise DavError
+
+pub fn parse_locks(String) -> Array[LockInfo] raise DavError
+
 pub fn parse_multistatus(String) -> Array[Resource] raise DavError
+
+pub fn parse_responses(String) -> Array[DavResponse] raise DavError
+
+pub fn parse_xml(String) -> XmlElement raise DavError
 
 pub fn path(String) -> String raise DavError
 
@@ -16,7 +28,15 @@ pub fn property_xml(String, String) -> String raise DavError
 
 pub fn propfind(String, Int, Array[String]) -> Request raise DavError
 
+pub fn propfind_names(String, Int, Array[(String, String)], names_only? : Bool) -> Request raise DavError
+
 pub fn proppatch(String, Array[(String, String)]) -> Request raise DavError
+
+pub fn refresh_lock(String, String, timeout? : String) -> Request raise DavError
+
+pub fn set_properties(String, Array[XmlElement], Array[(String, String)]) -> Request raise DavError
+
+pub fn unlock_request(String, String) -> Request raise DavError
 
 // Errors
 pub suberror DavError {
@@ -24,6 +44,24 @@ pub suberror DavError {
 } derive(@debug.Debug)
 
 // Types and methods
+pub(all) struct DavResponse {
+  hrefs : Array[String]
+  status : Int?
+  properties : Array[XmlProperty]
+  description : String?
+  location : String?
+  errors : Array[XmlElement]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct LockInfo {
+  token : String?
+  root : String?
+  owner : XmlElement?
+  scope : String
+  depth : String
+  timeout : String?
+} derive(Eq, ToJson, @debug.Debug)
+
 pub(all) struct Property {
   uri : String
   name : String
@@ -42,6 +80,31 @@ pub(all) struct Resource {
   href : String
   status : Int?
   properties : Array[Property]
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct XmlAttribute {
+  uri : String
+  name : String
+  value : String
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) enum XmlContent {
+  Text(String)
+  Element(XmlElement)
+} derive(Eq, ToJson, @debug.Debug)
+
+pub(all) struct XmlElement {
+  uri : String
+  name : String
+  attributes : Array[XmlAttribute]
+  content : Array[XmlContent]
+} derive(Eq, ToJson, @debug.Debug)
+pub fn XmlElement::text_content(Self) -> String
+pub fn XmlElement::to_xml(Self) -> String raise DavError
+
+pub(all) struct XmlProperty {
+  element : XmlElement
+  status : Int
 } derive(Eq, ToJson, @debug.Debug)
 
 // Type aliases

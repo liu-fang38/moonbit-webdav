@@ -1,5 +1,6 @@
 import {
   "localreview/webdav" @lib,
+  "moonbitlang/core/json",
 }
 
 supported_targets = "js"
@@ -15,6 +16,13 @@ options(
         "find_request",
         "transfer_request",
         "resources",
+        "xml_document",
+        "responses",
+        "find_extended",
+        "patch_request",
+        "lock_spec",
+        "lock_result",
+        "if_header",
       ],
       "format": "esm",
     },

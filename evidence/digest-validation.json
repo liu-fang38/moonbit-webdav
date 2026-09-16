@@ -1,0 +1,19 @@
+{
+  "date": "2026-09-16T17:43:51.617Z",
+  "publishedRfc7616Vectors": 2,
+  "pythonHashlibVectors": 18,
+  "additionalChecks": [
+    "challenge grammar",
+    "algorithm preference",
+    "nonce counts",
+    "auth-int tamper rejection",
+    "stream auth-int exclusion",
+    "response proof validation"
+  ],
+  "sourceSha256": {
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "tools/test-digest.mjs": "2674acfa7bb262dd5cf106f2962603fe1be27bebf72478ee2682a3210434063f",
+    "tools/digest-reference.py": "f0fd214f91d610699fd1bd66ab438f69c670a669953d4d529d49ad11f10041d6",
+    "evidence/digest-reference-vectors.json": "d92100a103b91110f81e49070c8d045917d084c868d445f36606b3fca5de5f96"
+  }
+}
