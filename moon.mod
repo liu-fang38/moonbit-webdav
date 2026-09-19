@@ -1,4 +1,4 @@
-name = "localreview/webdav"
+name = "liu-fang38/webdav"
 
 version = "0.4.0"
 
