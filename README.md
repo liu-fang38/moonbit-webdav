@@ -1,5 +1,7 @@
 # WebDAV 客户端与协议核心
 
+> 2026-09-21 本地构建修复：命令包 import 已同步到当前 moon.mod 模块名；moon info/check、JS 构建、MoonBit 示例和 Node 引擎示例通过。算法未改，本轮未重跑历史全部行为/性能套件。当前提交指纹见 evidence/module-import-fix.json。
+
 本地候选版 **0.4.0**。MoonBit 负责路径、请求、XML、属性和锁信息；Node.js 22+ 提供 HTTP(S)、认证、流式传输及命令行入口。已与未经修改的 WsgiDAV 4.3.5 / Cheroot 11.1.2 完成真实回环互操作和 TLS 验证，具体范围见 [TESTING.md](TESTING.md)。
 
 ## 使用客户端

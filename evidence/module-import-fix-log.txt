@@ -1,0 +1,23 @@
+$ C:\Users\uiwcv\Documents\Codex\2026-09-10\ban\work\moon\bin\moon.exe info
+Finished. moon: ran 4 tasks, now up to date
+
+$ C:\Users\uiwcv\Documents\Codex\2026-09-10\ban\work\moon\bin\moon.exe check --deny-warn
+Finished. moon: ran 4 tasks, now up to date
+
+$ C:\Users\uiwcv\Documents\Codex\2026-09-10\ban\work\moon\bin\moon.exe build --target js --deny-warn
+Finished. moon: ran 5 tasks, now up to date
+
+$ C:\Users\uiwcv\Documents\Codex\2026-09-10\ban\work\moon\bin\moon.exe run cmd/main
+[
+  {
+    href: "/notes/a.txt",
+    status: None,
+    properties: [
+      { uri: "DAV:", name: "getcontentlength", value: "42", status: 200 },
+      { uri: "DAV:", name: "displayname", value: "笔记", status: 200 },
+    ],
+  },
+]
+
+$ node tools/test-demo.mjs
+webdav: independent browser engine passed
