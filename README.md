@@ -1,5 +1,13 @@
 # WebDAV 客户端与协议核心
 
+## 获取与验证入口
+
+公开源码：[github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)；MoonBit 模块名为 `liu-fang38/webdav`。
+
+从源码运行：`git clone https://github.com/liu-fang38/moonbit-webdav.git` 后进入该目录，按下文和 [TESTING.md](TESTING.md) 安装所需工具。仓库公开不等于已在 Mooncakes 发布，不承诺 `moon add` 当前可用。
+
+查看 [GitHub Actions](https://github.com/liu-fang38/moonbit-webdav/actions) 时请核对 run 的 commit SHA；历史 evidence、旧 ZIP 与本地测试不能替代当前提交的 CI 结果。下文保留各版本的验证范围和兼容性限制。
+
 本地候选版 **0.4.0**。MoonBit 负责路径、请求、XML、属性和锁信息；Node.js 22+ 提供 HTTP(S)、认证、流式传输及命令行入口。已与未经修改的 WsgiDAV 4.3.5 / Cheroot 11.1.2 完成真实回环互操作和 TLS 验证，具体范围见 [TESTING.md](TESTING.md)。
 
 ## 使用客户端
@@ -92,4 +100,4 @@ node tools/dav.mjs lock /documents/large.bin
 
 XML 是有界 UTF-8/ASCII 声明的 XML 1.0 子集：保留展开名称、属性及混合文本，支持数字引用与 CDATA；注释/PI 接受但不保留，序列化不保留原前缀。DTD/外部实体、其它编码和完整 XML 符合性不在范围内。更多认证、代理、重定向、未知长度传输和多服务器/生产负载验证仍见 [FEATURES.md](FEATURES.md)。当前不能判定与成熟参考库完全追平。
 
-按 [RFC 4918](https://www.rfc-editor.org/rfc/rfc4918) 和 [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616) 独立实现，源码 MIT。参考功能范围为 [gowebdav](https://github.com/studio-b12/gowebdav)。未复制上游实现；Python 参考依赖不包含在仓库。`localreview` 是本地命名空间，发布前需替换。仓库独立构建、无 Git remote；未上传、发布或提交比赛。旧 ZIP/bundle 是历史快照。
+> 历史开发记录（以下发布/归档状态不代表当前仓库；当前入口见文首）：按 [RFC 4918](https://www.rfc-editor.org/rfc/rfc4918) 和 [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616) 独立实现，源码 MIT。参考功能范围为 [gowebdav](https://github.com/studio-b12/gowebdav)。未复制上游实现；Python 参考依赖不包含在仓库。当前模块名为 `liu-fang38/webdav`。仓库独立构建、无 Git remote；未上传、发布或提交比赛。旧 ZIP/bundle 是历史快照。
