@@ -1,0 +1,10 @@
+[
+  {
+    href: "/docs/report.txt",
+    status: None,
+    properties: [
+      { uri: "DAV:", name: "getcontentlength", value: "42", status: 200 },
+      { uri: "DAV:", name: "getetag", value: "\"v1\"", status: 200 },
+    ],
+  },
+]

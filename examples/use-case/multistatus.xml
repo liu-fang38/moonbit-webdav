@@ -1,0 +1,1 @@
+<?xml version="1.0"?><d:multistatus xmlns:d="DAV:"><d:response><d:href>/docs/report.txt</d:href><d:propstat><d:prop><d:getcontentlength>42</d:getcontentlength><d:getetag>"v1"</d:getetag></d:prop><d:status>HTTP/1.1 200 OK</d:status></d:propstat></d:response></d:multistatus>

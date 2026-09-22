@@ -1,0 +1,14 @@
+{
+  "title": "读取远端资源的条件写入元数据",
+  "scope": "离线合成 PROPFIND 响应；实际锁/流式上传的回环验证另列，本例不发网络请求。",
+  "steps": [
+    {
+      "args": [
+        "tools/cli.mjs",
+        "--file",
+        "examples/use-case/multistatus.xml"
+      ]
+    }
+  ],
+  "expected": "解析 href、42 字节长度、ETag v1；不把属性响应当作成功完成条件写入的证明。"
+}

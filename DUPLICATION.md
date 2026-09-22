@@ -1,3 +1,5 @@
+> 2026-09-22 三份初审反馈后的当前判断：**条件复审**。没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。 本次差异说明：moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。 以下保留之前检索的固定提交与来源；此前“补足场景”不能理解为本次已解除价值异议。
+
 # webdav 查重与定位 · 2026-09-22
 
 [justinwongcn/moon-ical 的 CalDAV 服务端](https://github.com/justinwongcn/moon-ical)。moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。

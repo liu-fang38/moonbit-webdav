@@ -1,0 +1,17 @@
+{
+  "project": "webdav",
+  "title": "WebDAV 条件写入、锁与流式文件客户端",
+  "module": "liu-fang38/webdav",
+  "version": "0.4.0",
+  "repository": "https://github.com/liu-fang38/moonbit-webdav",
+  "status": "条件复审",
+  "remainingRisk": "没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。",
+  "actualUsersClaimed": false,
+  "anonymousCloneVerified": true,
+  "publicHead": "6a780dd19fbda252342cb8773caa88bf57a3023a",
+  "defaultBranch": "origin/main",
+  "localChangesPublished": false,
+  "proposalLines": 25,
+  "useCase": "读取远端资源的条件写入元数据",
+  "diff": "moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。"
+}

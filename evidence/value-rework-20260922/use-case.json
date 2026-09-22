@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-22",
+  "command": "node examples/run-use-case.mjs",
+  "passed": true,
+  "scope": "离线合成 PROPFIND 响应；实际锁/流式上传的回环验证另列，本例不发网络请求。",
+  "actualUsersProven": false,
+  "externalServicesContacted": false,
+  "sourceSha256": {
+    "authoring.mbt": "0c245ae0b7509ec4282256d908ed36862e1a4a380817d13fdc85411b565f3eff",
+    "authoring_test.mbt": "6233244cf2dd5eee584ab9cf98499d69b565909632c71ed640d36155600444bc",
+    "core_test.mbt": "48375d37743d224afde876fb42555c4647ef325e01cfebf005594f2a5e9b12f5",
+    "dav.mbt": "8fd602c56d765db67ace65a94c1d13ff722205d3edd641d6fc3bda755c0bf126",
+    "moon.mod": "65e5e32fd5557b1a17008fafb991a21ca88004c7fb860f414fa83043867a9189",
+    "moon.pkg": "34b39edb72f996df1c137cea631241591fe9b27fb41f1285e71386948ea3d633",
+    "multistatus.mbt": "6cdbe7ebcd2d784c7335afa5afc64aeebd47c317d327e46959010999e6c417b6",
+    "pkg.generated.mbti": "aea24cad3affec731be3f1bd2c7befd179504cf5c1675d7369c283e4278d9e77",
+    "usability.mbt": "a176347a5244205baf79ec8fed4c123f3238d75a380fd8fb27c0e1dc39d1c899",
+    "xml.mbt": "026e8d391c049ce895676b364a691ba873584fe6fb1b48af093675a40bdd421d",
+    "examples/run-use-case.mjs": "359ea34b13ee185b6cae0536da5e25bb56bfc51d2e5dd166c304b1684003a3bb",
+    "examples/use-case.json": "1cdcf3f212b37e5f5aa3cf887c17318d36e89ba276eb79f0f98a406a70c4a00b",
+    "tools/benchmark.mjs": "53ac611536ba7cb3732017d22976ff8f38dbd9e7aa579c2469eab75b0cdc7216",
+    "tools/cli.mjs": "f98839799f2896c92a75e6565add432efe166f00bc3fed89e03d6d59eca688d4",
+    "tools/client.mjs": "bb36759a88c648571448db2d2524a12ad6906dafe3bad5e08ca2ca00e1cf5d75",
+    "tools/dav.mjs": "86624f1ecb6950d58e8c20cf0f739b4d21a0134e666ec54a6ca0041028f7e5e8",
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "tools/robustness.mjs": "24964a078897dccc448ba3d5db4c08f6446d38008424987bf26b4b6f042a21d6",
+    "tools/test-authoring-client.mjs": "a8d5c8af1f770a9c01b5d86fdd513351f655bbe6c862da8c8f6c37cd57f5c2a4",
+    "tools/test-cli.mjs": "b1acaf8992e16d37e1527fd60beeea275ce0df574a9622ab3b44d86dcaf08b03",
+    "tools/test-demo.mjs": "02ec6337b9c72c299450db6f0d2b024fd4fd96193d17e5cd501c3a8e6eb87188",
+    "tools/test-digest.mjs": "2674acfa7bb262dd5cf106f2962603fe1be27bebf72478ee2682a3210434063f",
+    "tools/test-network.mjs": "0d5d8142bec45d9b41316031f5bfe7b5b168c0a0ba532cf7c25d545b9ab61629",
+    "tools/test-wsgidav.mjs": "4e88559686025e99404d06968d91f680640c66620c442b7c590fe5385436c6d7",
+    "tools/test-xml-reference.mjs": "ee69a3d7b1243bbb8f9add9cbe009f80cbbe9a4df8d5b73a05f5ece1dbfb9642",
+    "web/app.mjs": "12a0cf3565b6298e2e3760355ec5da3fed88870be604b7f6e1a2f57d7334578d",
+    "web/config.mjs": "3c5d6cdb961b4ccfdf2a62020a8e91aea13a90826b57c1b738963d94663c5b4f",
+    "web/engine.mjs": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6",
+    "examples/use-case/multistatus.xml": "1c73672030c59e140e49641a70c56ebcbff9c0b64be02b60919f012a30a89b59",
+    "cmd/main/main.mbt": "2e622d2dc69fd751ee34e09aa7602d0bc776d4ff04ea616e791b8e6ae156f3c9",
+    "cmd/main/moon.pkg": "50442b21eb8a3b066c3588d37fe943a16a0642824c7c0bfe82a48d812fe56b3c",
+    "cmd/main/pkg.generated.mbti": "d3301d34d53738e85c740c58ab555cae2e822277d5e17fb78bb95df7e766dce1",
+    "cmd/web/authoring.mbt": "6fdf2371515c112628a8ce4917878665532acbbc730af2bfe14aa81fe0d8057a",
+    "cmd/web/client.mbt": "f5ee2a7c645bc97b0721f2afcee11009fa27fa7b9a1cbc716ab772e28cf24e2d",
+    "cmd/web/main.mbt": "7bcb70353e1d843a92aa60d4a5e4503c04ec492ea1ada263e09894a7921d5424",
+    "cmd/web/moon.pkg": "03f028909a48183cae44b73d1a29984dff3633d849f3516a22447d9927cfad58"
+  },
+  "outputs": [
+    {
+      "file": "step-1.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "step-1.stdout.txt",
+      "bytes": 231,
+      "sha256": "d05af184ff5832ade99d9c92bed28f49ac841d973ef90fcf6aa841237c37a439"
+    }
+  ],
+  "additionalChecks": null,
+  "previousCoreValidation": "evidence/innovation-review-20260922/results.json",
+  "note": "New sample execution only; earlier core/reference checks retain their original scope. Command output logs replace the machine-specific temporary directory with {output}; output hashes refer to original bytes.",
+  "sourceHashBasis": "Git-normalized blobs in the delivered source archive. Protocol fixtures are explicitly -text to preserve CRLF; ordinary source line endings normalize to LF."
+}

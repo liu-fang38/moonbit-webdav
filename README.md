@@ -1,99 +1,63 @@
-> 2026-09-22 当前本地版 0.4.0：申报定位为“WebDAV 条件写入、锁与流式文件客户端”。已更新[现有项目对照](DUPLICATION.md)、[申报草稿](PROPOSAL.md)及[本轮验证](evidence/innovation-review-20260922/results.json)。下面带日期的旧轮次描述保留历史范围；团队已有公开仓库，本次本地修订尚未由本任务推送。
+# WebDAV 条件写入、锁与流式文件客户端
 
-# WebDAV 客户端与协议核心
+**本项目仓库：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)**
 
-> 2026-09-21 本地构建修复：命令包 import 已同步到当前 moon.mod 模块名；moon info/check、JS 构建、MoonBit 示例和 Node 引擎示例通过。算法未改，本轮未重跑历史全部行为/性能套件。当前提交指纹见 evidence/module-import-fix.json。
+模块 `liu-fang38/webdav`，本地版本 **0.4.0**，MIT。当前评审状态：**条件复审**。本文件是当前入口，旧轮次说明与详细用法保存在 [历史/完整使用说明](README-BEFORE-VALUE-REWORK.md)。
 
-本地候选版 **0.4.0**。MoonBit 负责路径、请求、XML、属性和锁信息；Node.js 22+ 提供 HTTP(S)、认证、流式传输及命令行入口。已与未经修改的 WsgiDAV 4.3.5 / Cheroot 11.1.2 完成真实回环互操作和 TLS 验证，具体范围见 [TESTING.md](TESTING.md)。
+## 解决什么任务
 
-## 使用客户端
+将通用远程文件操作接入应用，支持条件请求、锁刷新和流式传输，减少覆盖并发更新或一次性载入大文件的风险。
 
-不需要安装 npm 依赖，已附 MoonBit 编译的 `web/engine.mjs`。origin 只接受服务器根地址；方法参数是未经百分号编码的绝对路径。
+需要互通通用 DAV 文件端点、条件写入与锁时评估；与日历 CalDAV 服务端不同，但协议版本完整性有限。
 
-```js
-import { WebDavClient } from './tools/client.mjs';
-import { createReadStream, createWriteStream } from 'node:fs';
-import { stat } from 'node:fs/promises';
-import { pipeline } from 'node:stream/promises';
+## 直接复现
 
-const dav = new WebDavClient('https://dav.example.com', {
-  username: 'user', password: process.env.DAV_PASSWORD, auth: 'digest',
-});
-await dav.mkdirAll('/documents/2026/');
-await dav.put('/documents/2026/中文.txt', '你好', {
-  headers: { 'If-None-Match': '*' },
-});
-const info = await dav.stat('/documents/2026/中文.txt'); // size: BigInt | undefined
-const entries = await dav.list('/documents/2026/');
-await dav.proppatch('/documents/2026/中文.txt', {
-  set: [
-    { uri: 'urn:example', name: 'color', value: 'blue & green' },
-    { xml: '<x:note xmlns:x="urn:example" xml:lang="zh">前<x:b>中</x:b>后</x:note>' },
-  ],
-  remove: [{ uri: 'urn:example', name: 'old' }],
-});
-const properties = await dav.propfind('/documents/2026/中文.txt', {
-  depth: 0, properties: [{ uri: 'urn:example', name: 'note' }],
-}); // responses preserves XML structure and each property's status
+安装 MoonBit 和 Node.js 24，在本仓库根目录运行：
 
-const lock = await dav.lock('/documents/2026/中文.txt', { depth: 0, owner: 'my app' });
-try {
-  await dav.put('/documents/2026/中文.txt', '更新', { lockTokens: [lock.token] });
-  await dav.refreshLock('/documents/2026/中文.txt', lock.token);
-} finally {
-  await dav.unlock('/documents/2026/中文.txt', lock.token);
-}
-
-const local = './large.bin';
-await dav.putStream('/documents/large.bin', () => createReadStream(local), {
-  length: (await stat(local)).size,
-});
-const download = await dav.getStream('/documents/large.bin');
-await pipeline(download.body, createWriteStream('./download.bin'));
-await download.completed;
+```sh
+moon build --target js
+node -e "require('node:fs').copyFileSync('_build/js/debug/build/cmd/web/web.js','web/engine.mjs')"
+node examples/run-use-case.mjs
 ```
 
-还支持 GET/HEAD/PUT/DELETE/MKCOL/OPTIONS、COPY/MOVE、`propfind({namesOnly:true})`。复制/移动默认不覆盖；可传 `overwrite:true`。下载可通过 `headers:{Range:'bytes=100-999'}` 获取范围响应。带源、目标锁的复制/移动可传 `lockConditions:[{path:'/source',tokens:[token1]},{path:'/destination',tokens:[token2]}]`；不能同时传 `lockTokens`。
+流程：**读取远端资源的条件写入元数据**。运行器创建新的系统临时目录，保留每一步的 stdout/stderr、产物及 `report.json`，打印实际目录；重复运行不会覆盖之前产物。它只执行仓库内的本地样例，不连接公网或发送消息。`report.json` 的 `expected` 是应观察的结果，实际结果在各步输出中；成功退出不替代内容核对。
 
-## 认证、流与错误
+输入性质：离线合成 PROPFIND 响应；实际锁/流式上传的回环验证另列，本例不发网络请求。
 
-`auth` 可选 `none`、`basic`、`bearer`、`digest`、`auto`。为兼容 0.3，API 提供用户名时默认 Basic；网络 CLI 默认 Digest。建议显式指定并使用 HTTPS。Digest 支持 MD5/SHA-256/SHA-512-256 及各自 sess 变体；支持 auth、缓冲体 auth-int、无 qop、UTF-8/userhash、nonce 计数和可选 rspauth 校验。auto 优先可用 Digest，已用 Digest 后不降级 Basic。普通网络故障不自动重放；认证挑战至多总计三次请求，共用总超时。
+应观察：解析 href、42 字节长度、ETag v1；不把属性响应当作成功完成条件写入的证明。
 
-默认总超时 10 秒、缓冲响应上限 8 MiB，可配置 `timeout`、`maxResponseBytes`；HTTPS 验证证书及主机名，可提供 `ca`。不跟随重定向。请求可传 `signal`，自定义头不能覆盖 Host/Authorization/Content-Length 等受管字段。
+具体命令和输入路径见 [使用任务](USE-CASE.md) 与 [机器可读流程](examples/use-case.json)。只把这个脚本当复现入口，不把通用运行器计作核心技术贡献。
 
-流式上传要求准确的非负安全整数 `length`，检查过短/过长并遵守传输背压。Digest/auto 上传必须传可重复调用、每次返回新 Readable 的工厂；工厂负责提供相同内容。流式 auth-int、未知长度/chunked 上传暂不支持。`getStream` 的 `completed` 在整个响应消费完成后兑现；应消费或销毁 `body` 并等待完成。流不受缓冲响应 8 MiB 上限限制，仍受超时/取消控制。
+## 实现与已有项目的关系
 
-- 非 2xx：`DavHttpError`，`response` 保存状态、头和有界响应体。
-- 非法 XML、错误 Multi-Status 状态或锁令牌不匹配：`DavProtocolError`。
-- PROPPATCH、COPY/MOVE、DELETE 的 207 中存在失败项：`DavMultiStatusError`，保留逐项结果。
-- PROPFIND 返回 `resources`（旧的扁平视图）与 `responses`（XML 属性/混合内容的丰富视图）；调用者检查各属性状态。
+MoonBit 处理路径、请求、XML、属性和锁信息；Node 提供 HTTP(S)、Digest、流式 I/O 和文件入口。
 
-MoonBit 的旧 `Resource` 和既有 `resources` JSON 编码保持兼容；旧 JSON 的可选值沿用编译器编码。新 `responses` 与锁对象的可选字段采用普通值或 `null`。
+moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。
 
-## 网络命令行
+同类项目和检索边界见 [DUPLICATION](DUPLICATION.md)。查重用于避免错误的首创表述；关键词零结果不能证明生态空白，Node 宿主能力也不计为 MoonBit 原生 I/O。
 
-```powershell
-$env:DAV_ORIGIN='https://dav.example.com'
-$env:DAV_USERNAME='user'
-$env:DAV_PASSWORD='your-password'
-node tools/dav.mjs --help
-node tools/dav.mjs mkdir /documents/2026/
-node tools/dav.mjs put /documents/large.bin C:/files/large.bin
-node tools/dav.mjs stat /documents/large.bin
-node tools/dav.mjs lock /documents/large.bin
+库使用从 [公共 API](pkg.generated.mbti) 和根包源码开始；可在本 checkout 的消费包中导入 `"liu-fang38/webdav"`。源码中的网络/文件宿主入口及完整参数仍见 [完整使用说明](README-BEFORE-VALUE-REWORK.md)。是否已发布到 Mooncakes 需另核实，本文不把 `moon add` 的下载成功作为已完成事项。
+
+## 验证与边界
+
+前一轮工程验证回环 authoring 客户端、条件请求/锁和传输检查通过；历史 WsgiDAV 对照与前一轮工程验证本机 peer 证据分开。
+
+[上一轮工程验证](evidence/innovation-review-20260922/results.json) 与 [本轮最小任务回执](evidence/value-rework-20260922/use-case.json) 分开。历史参考版本、golden 重放、本机 peer、真实第三方服务端和本次样例是不同证据，不能合并成“全部生产验证”。
+
+常规核心检查可运行 `moon check --target js`、`moon test --target js`、`moon test --target wasm-gc`。专项命令：
+
+```sh
+node tools/test-authoring-client.mjs
 ```
 
-`get PATH` 将二进制写到 stdout；其余命令输出 JSON，size 是十进制字符串。CLI 还支持 ls/copy/move/rm/props/refresh/unlock；失败退出码为 1。`DAV_LOCK_TOKEN` 为写操作附加一个令牌；其余认证、CA 和超时环境变量见 `--help`。原 `tools/cli.mjs` 仍是 XML 解析入口。
+专项所需的参考环境和历史版本见原使用说明及 TESTING 文档；本轮回执只记录实际执行项，不声称上面所有参考服务在任意环境即装即跑。
 
-## 构建、验证与本地审查
+不提供完整 CalDAV/CardDAV 客户端或所有服务器扩展，兼容性以固定服务端和已测请求为限。
 
-```powershell
-./verify.ps1 -MoonPath C:/path/to/moon/bin/moon.exe
-./start-review.ps1
-```
+## 复审材料状态
 
-浏览器审查页为 `http://127.0.0.1:8796/web/`，运行实际编译的 MoonBit XML 核心。验证脚本运行 Wasm-GC/JS、独立静态向量、故障夹具、网页核心、CLI、边界输入与示例基准。[可执行文档](README.mbt.md)随 MoonBit 测试运行；独立服务器单独复现，避免默认检查隐式安装依赖。
+没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。
 
-XML 是有界 UTF-8/ASCII 声明的 XML 1.0 子集：保留展开名称、属性及混合文本，支持数字引用与 CDATA；注释/PI 接受但不保留，序列化不保留原前缀。DTD/外部实体、其它编码和完整 XML 符合性不在范围内。更多认证、代理、重定向、未知长度传输和多服务器/生产负载验证仍见 [FEATURES.md](FEATURES.md)。当前不能判定与成熟参考库完全追平。
+2026-09-22 匿名新克隆成功；默认分支 `main`，核验公开提交 `6a780dd19fbda252342cb8773caa88bf57a3023a`。本轮源码修订仅在本地，尚未推送；此记录不证明当时报名表中的地址正确，也不证明新修订已上线。
 
-按 [RFC 4918](https://www.rfc-editor.org/rfc/rfc4918) 和 [RFC 7616](https://www.rfc-editor.org/rfc/rfc7616) 独立实现，源码 MIT。参考功能范围为 [gowebdav](https://github.com/studio-b12/gowebdav)。未复制上游实现；Python 参考依赖不包含在仓库。`localreview` 是本地命名空间，发布前需替换。仓库独立构建、无 Git remote；未上传、发布或提交比赛。旧 ZIP/bundle 是历史快照。
+[申报草稿](PROPOSAL.md) 已压缩为 30 行以内，并单独标明本项目仓库；[复核说明](REVIEW-RESPONSE.md) 区分材料错误、功能变化及尚未解决的问题。没有编造用户、设备接入、生产部署或评审认可。
