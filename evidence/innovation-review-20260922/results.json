@@ -1,0 +1,56 @@
+{
+  "date": "2026-09-22",
+  "project": "webdav",
+  "package": "liu-fang38/webdav",
+  "version": "0.4.0",
+  "code_base_commit_before_materials": "30329c0cc9b616b9d126a73c606b43804de5deca",
+  "core_checks": [
+    {
+      "command": [
+        "moon",
+        "test",
+        "--target",
+        "js"
+      ],
+      "exit": 0,
+      "seconds": 2.57,
+      "log": "webdav-test---target-js.log"
+    },
+    {
+      "command": [
+        "moon",
+        "test",
+        "--target",
+        "wasm-gc"
+      ],
+      "exit": 0,
+      "seconds": 2.14,
+      "log": "webdav-test---target-wasm-gc.log"
+    },
+    {
+      "command": [
+        "moon",
+        "build",
+        "--target",
+        "js"
+      ],
+      "exit": 0,
+      "seconds": 1.13,
+      "log": "webdav-build---target-js.log"
+    }
+  ],
+  "workflow_checks": [
+    {
+      "command": [
+        "node",
+        "tools/test-authoring-client.mjs"
+      ],
+      "exit": 0,
+      "seconds": 0.77,
+      "log": "webdav-workflow-0.log"
+    }
+  ],
+  "interpretation": "本轮回环 authoring 客户端、条件请求/锁和传输检查通过；历史 WsgiDAV 对照与本轮本机 peer 证据分开。",
+  "limit": "不提供完整 CalDAV/CardDAV 客户端或所有服务器扩展，兼容性以固定服务端和已测请求为限。",
+  "remote_push_performed": false
+}
