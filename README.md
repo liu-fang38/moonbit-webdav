@@ -1,63 +1,41 @@
-# WebDAV 条件写入、锁与流式文件客户端
+# WebDAV 条件写入与冲突处理客户端
 
 **本项目仓库：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)**
 
-模块 `liu-fang38/webdav`，本地版本 **0.4.0**，MIT。当前评审状态：**条件复审**。本文件是当前入口，旧轮次说明与详细用法保存在 [历史/完整使用说明](README-BEFORE-VALUE-REWORK.md)。
+模块 `liu-fang38/webdav`，本地 **0.4.1**，MIT。本轮为预防性整改；审核结果未知，没有把本地修订写成已通过。未推送、发布或提交表单。
 
-## 解决什么任务
+## 具体任务
 
-将通用远程文件操作接入应用，支持条件请求、锁刷新和流式传输，减少覆盖并发更新或一次性载入大文件的风险。
+两个客户端编辑同一个远程配置文件时，用强ETag的If-Match条件拒绝过期写入，保留已写入版本；调用方明确解决冲突后，再针对当前ETag提交。
 
-需要互通通用 DAV 文件端点、条件写入与锁时评估；与日历 CalDAV 服务端不同，但协议版本完整性有限。
+MoonBit处理路径、请求、XML、属性和锁；Node提供HTTP(S)、Digest和文件/流式I/O。0.4.1主例组合已有公开WebDavClient API，加入两个独立客户端的真实条件写入流程，没有宣称新的并发控制算法。
 
-## 直接复现
+## 可运行主例
 
-安装 MoonBit 和 Node.js 24，在本仓库根目录运行：
+需Python及固定WsgiDAV/cheroot/cryptography测试依赖，隔离安装和WSGIDAV_PYTHONPATH见下文。
 
 ```sh
 moon build --target js
 node -e "require('node:fs').copyFileSync('_build/js/debug/build/cmd/web/web.js','web/engine.mjs')"
-node examples/run-use-case.mjs
+node examples/run-conflict-workflow.mjs
 ```
 
-流程：**读取远端资源的条件写入元数据**。运行器创建新的系统临时目录，保留每一步的 stdout/stderr、产物及 `report.json`，打印实际目录；重复运行不会覆盖之前产物。它只执行仓库内的本地样例，不连接公网或发送消息。`report.json` 的 `expected` 是应观察的结果，实际结果在各步输出中；成功退出不替代内容核对。
+两个客户端读取相同初始文件/ETag。Alice写入新内容，Bob用旧ETag提交不同内容得到412；再次读取证明Alice内容未被覆盖。样例明确保留Alice内容并补Bob的备注，再用当前ETag写入；GET结果与独立服务端文件系统字节一致。
 
-输入性质：离线合成 PROPFIND 响应；实际锁/流式上传的回环验证另列，本例不发网络请求。
+未经修改的WsgiDAV4.3.5独立服务器、临时共享目录、两个客户端，通过校验临时证书的本机HTTPS和Digest运行。输入为原创配置示例，不是企业文档平台采用或完整同步验收。
 
-应观察：解析 href、42 字节长度、ETag v1；不把属性响应当作成功完成条件写入的证明。
+运行成功会打印新的系统临时目录。report.json包含staleWriteStatus=412、winnerPreserved=true、explicitResolutionWritten=true、filesystemBytesMatch=true和五份文件的SHA-256。 输出位置每次不同，不要求运行标识完全确定。[保存的本轮产物](evidence/workflow-20260923/example-output/report.json)与[全部本轮检查](evidence/workflow-20260923/LOCAL-CHECKS.json)可直接核对。
 
-具体命令和输入路径见 [使用任务](USE-CASE.md) 与 [机器可读流程](examples/use-case.json)。只把这个脚本当复现入口，不把通用运行器计作核心技术贡献。
+## 验证与交付边界
 
-## 实现与已有项目的关系
+JS/Wasm-GC各23项核心测试、13组authoring/Digest/stream检查、既有独立WsgiDAV对照、引擎与CLI通过；新主例保存初始、被拒绝、冲突后及显式解决后的文件和哈希。旧对照中的WsgiDAV propname限制仍保留，不冒充所有WebDAV扩展兼容。
 
-MoonBit 处理路径、请求、XML、属性和锁信息；Node 提供 HTTP(S)、Digest、流式 I/O 和文件入口。
+If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。
 
-moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。
+已有核心API见 [pkg.generated.mbti](pkg.generated.mbti)；完整宿主接口仍见 [先前使用说明](README-BEFORE-VALUE-REWORK.md)。本轮主例/依赖/失败语义见 [WORKFLOW](WORKFLOW.md)。新主例已接入CI配置，但本任务没有运行远程CI。
 
-同类项目和检索边界见 [DUPLICATION](DUPLICATION.md)。查重用于避免错误的首创表述；关键词零结果不能证明生态空白，Node 宿主能力也不计为 MoonBit 原生 I/O。
+## 与已有生态关系
 
-库使用从 [公共 API](pkg.generated.mbti) 和根包源码开始；可在本 checkout 的消费包中导入 `"liu-fang38/webdav"`。源码中的网络/文件宿主入口及完整参数仍见 [完整使用说明](README-BEFORE-VALUE-REWORK.md)。是否已发布到 Mooncakes 需另核实，本文不把 `moon add` 的下载成功作为已完成事项。
+已有moon-ical的CalDAV服务端，通用WebDAV客户端和HTTP条件请求也不是新概念。本项目交付范围是MoonBit请求/XML核心及Node文件authoring宿主，区分日历服务与通用文件访问；不把整个DAV生态说成空白，也未声称基于moon-ical扩展。
 
-## 验证与边界
-
-前一轮工程验证回环 authoring 客户端、条件请求/锁和传输检查通过；历史 WsgiDAV 对照与前一轮工程验证本机 peer 证据分开。
-
-[上一轮工程验证](evidence/innovation-review-20260922/results.json) 与 [本轮最小任务回执](evidence/value-rework-20260922/use-case.json) 分开。历史参考版本、golden 重放、本机 peer、真实第三方服务端和本次样例是不同证据，不能合并成“全部生产验证”。
-
-常规核心检查可运行 `moon check --target js`、`moon test --target js`、`moon test --target wasm-gc`。专项命令：
-
-```sh
-node tools/test-authoring-client.mjs
-```
-
-专项所需的参考环境和历史版本见原使用说明及 TESTING 文档；本轮回执只记录实际执行项，不声称上面所有参考服务在任意环境即装即跑。
-
-不提供完整 CalDAV/CardDAV 客户端或所有服务器扩展，兼容性以固定服务端和已测请求为限。
-
-## 复审材料状态
-
-没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。
-
-2026-09-22 匿名新克隆成功；默认分支 `main`，核验公开提交 `6a780dd19fbda252342cb8773caa88bf57a3023a`。本轮源码修订仅在本地，尚未推送；此记录不证明当时报名表中的地址正确，也不证明新修订已上线。
-
-[申报草稿](PROPOSAL.md) 已压缩为 30 行以内，并单独标明本项目仓库；[复核说明](REVIEW-RESPONSE.md) 区分材料错误、功能变化及尚未解决的问题。没有编造用户、设备接入、生产部署或评审认可。
+[DUPLICATION](DUPLICATION.md)保留固定来源及检索范围。没有查到相同关键词不构成生态空白证明，也没有编造使用方或上游认可。当前 [申报草稿](PROPOSAL.md)与 [复核说明](REVIEW-RESPONSE.md)对齐实际流程；[此前材料](docs/before-workflow/README.md)仅为历史。

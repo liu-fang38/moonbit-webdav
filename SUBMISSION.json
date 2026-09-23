@@ -1,17 +1,20 @@
 {
   "project": "webdav",
-  "title": "WebDAV 条件写入、锁与流式文件客户端",
+  "title": "WebDAV 条件写入与冲突处理客户端",
   "module": "liu-fang38/webdav",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
-  "status": "条件复审",
-  "remainingRisk": "没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。",
+  "status": "审核结果未知；本轮预防性本地整改",
+  "remainingRisk": "If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。",
   "actualUsersClaimed": false,
-  "anonymousCloneVerified": true,
-  "publicHead": "6a780dd19fbda252342cb8773caa88bf57a3023a",
   "defaultBranch": "origin/main",
   "localChangesPublished": false,
   "proposalLines": 25,
-  "useCase": "读取远端资源的条件写入元数据",
-  "diff": "moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。"
+  "useCase": "两个客户端编辑同一个远程配置文件时，用强ETag的If-Match条件拒绝过期写入，保留已写入版本；调用方明确解决冲突后，再针对当前ETag提交。",
+  "diff": "已有moon-ical的CalDAV服务端，通用WebDAV客户端和HTTP条件请求也不是新概念。本项目交付范围是MoonBit请求/XML核心及Node文件authoring宿主，区分日历服务与通用文件访问；不把整个DAV生态说成空白，也未声称基于moon-ical扩展。",
+  "historicalAnonymousClone": {
+    "date": "2026-09-22",
+    "head": "6a780dd19fbda252342cb8773caa88bf57a3023a",
+    "notCurrentPublicHeadClaim": true
+  }
 }

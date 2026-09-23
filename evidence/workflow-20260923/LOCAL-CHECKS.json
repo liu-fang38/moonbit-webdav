@@ -1,0 +1,144 @@
+{
+  "date": "2026-09-23",
+  "project": "webdav",
+  "checks": [
+    {
+      "check": "toolchain",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "version",
+        "--all"
+      ],
+      "exit": 0,
+      "log": "toolchain.log"
+    },
+    {
+      "check": "node-version",
+      "command": [
+        "node",
+        "--version"
+      ],
+      "exit": 0,
+      "log": "node-version.log"
+    },
+    {
+      "check": "fmt",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "fmt"
+      ],
+      "exit": 0,
+      "log": "fmt.log"
+    },
+    {
+      "check": "info",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "info"
+      ],
+      "exit": 0,
+      "log": "info.log"
+    },
+    {
+      "check": "check-js",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "check",
+        "--target",
+        "js"
+      ],
+      "exit": 0,
+      "log": "check-js.log"
+    },
+    {
+      "check": "test-js",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "test",
+        "--target",
+        "js"
+      ],
+      "exit": 0,
+      "log": "test-js.log"
+    },
+    {
+      "check": "test-wasm-gc",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "test",
+        "--target",
+        "wasm-gc"
+      ],
+      "exit": 0,
+      "log": "test-wasm-gc.log"
+    },
+    {
+      "check": "build-js",
+      "command": [
+        "C:\\Users\\uiwcv\\Documents\\Codex\\2026-09-10\\ban\\work\\moon\\bin\\moon.exe",
+        "build",
+        "--target",
+        "js"
+      ],
+      "exit": 0,
+      "log": "build-js.log"
+    },
+    {
+      "check": "main-workflow",
+      "command": [
+        "node",
+        "examples/run-conflict-workflow.mjs"
+      ],
+      "exit": 0,
+      "log": "main-workflow.log"
+    },
+    {
+      "check": "test-authoring-client",
+      "command": [
+        "node",
+        "tools/test-authoring-client.mjs"
+      ],
+      "exit": 0,
+      "log": "test-authoring-client.log"
+    },
+    {
+      "check": "test-wsgidav",
+      "command": [
+        "node",
+        "tools/test-wsgidav.mjs"
+      ],
+      "exit": 0,
+      "log": "test-wsgidav.log"
+    },
+    {
+      "check": "test-demo",
+      "command": [
+        "node",
+        "tools/test-demo.mjs"
+      ],
+      "exit": 0,
+      "log": "test-demo.log"
+    },
+    {
+      "check": "test-cli",
+      "command": [
+        "node",
+        "tools/test-cli.mjs"
+      ],
+      "exit": 0,
+      "log": "test-cli.log"
+    }
+  ],
+  "sourceSha256": {
+    "web/engine.mjs": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6",
+    "tools/client.mjs": "bb36759a88c648571448db2d2524a12ad6906dafe3bad5e08ca2ca00e1cf5d75",
+    "examples/run-conflict-workflow.mjs": "566f1babf8ef339ea2168caa7b8b100374e25ac7f7e39445c0c9057fef343f7f",
+    "tools/wsgidav-harness.mjs": "a22639c34b4d3a915590be4a0a7f3e0f8d3f488c04fc1dcebd764a3f158ebb52",
+    "tools/wsgidav-reference.py": "503f0b73f985d0b70182c3fe59ea2316a8be9526e5efc01a9f3334a27c053652"
+  },
+  "historicalEvidencePreserved": true,
+  "remoteCIExecuted": false,
+  "published": false,
+  "productionUsersClaimed": false,
+  "scope": "Fresh core and selected related checks, not rerun of every historical validation"
+}

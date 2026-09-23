@@ -1,0 +1,20 @@
+PASS independently seeded binary bytes through Digest authentication
+PASS bad credentials and missing credentials fail closed
+PASS Basic and auto authentication interoperate with independent server
+PASS mkdirAll, Unicode paths, stat and list preserve metadata
+PASS conditional write rejects stale ETag without altering file
+PASS dead properties preserve custom namespaces attributes and mixed XML
+PASS WsgiDAV propname limitation is rejected; protected-property failures remain observable
+PASS exclusive lock blocks writes and refresh/token write/unlock succeed
+PASS depth-infinity parent lock requires token for descendants
+PASS lock unmapped resource creates an empty locked file
+PASS shared locks and token-authorized writes interoperate
+PASS COPY MOVE with tagged source and destination locks
+PASS stream upload retries Digest with fresh source and verifies filesystem bytes
+PASS stream download Range preserves partial content status and bytes
+PASS HTTPS requires trusted certificate and matching hostname
+PASS collection COPY, MOVE, recursive DELETE and missing-path errors
+PASS network CLI streams real files and exposes lock lifecycle and failures
+17 independent WsgiDAV groups passed; temporary server/share removed
+
+STDERR

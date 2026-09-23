@@ -1,0 +1,4 @@
+# External independent test server only; not runtime library dependencies.
+WsgiDAV==4.3.5
+cheroot==11.1.2
+cryptography==50.0.1

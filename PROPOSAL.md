@@ -1,25 +1,25 @@
-# WebDAV 条件写入、锁与流式文件客户端 · 修订申报草稿
+# WebDAV 条件写入与冲突处理客户端 · 修订申报草稿
 
 本项目仓库：https://github.com/liu-fang38/moonbit-webdav
-模块 / 本地版本：`liu-fang38/webdav` / `0.4.0`；许可证：MIT。
-修订状态：条件复审；本轮仅本地修订，未推送或提交表单。
+模块 / 本地版本：`liu-fang38/webdav` / `0.4.1`；MIT。
+状态：审核结果未知，本轮预防性本地整改，未推送、发布或提交表单。
 
-## 任务与选择依据
-将通用远程文件操作接入应用，支持条件请求、锁刷新和流式传输，减少覆盖并发更新或一次性载入大文件的风险。
-需要互通通用 DAV 文件端点、条件写入与锁时评估；与日历 CalDAV 服务端不同，但协议版本完整性有限。
+## 任务与实现
+两个客户端编辑同一个远程配置文件时，用强ETag的If-Match条件拒绝过期写入，保留已写入版本；调用方明确解决冲突后，再针对当前ETag提交。
+MoonBit处理路径、请求、XML、属性和锁；Node提供HTTP(S)、Digest和文件/流式I/O。0.4.1主例组合已有公开WebDavClient API，加入两个独立客户端的真实条件写入流程，没有宣称新的并发控制算法。
+两个客户端读取相同初始文件/ETag。Alice写入新内容，Bob用旧ETag提交不同内容得到412；再次读取证明Alice内容未被覆盖。样例明确保留Alice内容并补Bob的备注，再用当前ETag写入；GET结果与独立服务端文件系统字节一致。
 
-## 已实现内容
-MoonBit 处理路径、请求、XML、属性和锁信息；Node 提供 HTTP(S)、Digest、流式 I/O 和文件入口。
-可复现任务：读取远端资源的条件写入元数据；按 README 构建后运行 `node examples/run-use-case.mjs`，输入与输出见 USE-CASE.md。
-前一轮工程验证回环 authoring 客户端、条件请求/锁和传输检查通过；历史 WsgiDAV 对照与前一轮工程验证本机 peer 证据分开。
+## 已有生态与扩展范围
+已有moon-ical的CalDAV服务端，通用WebDAV客户端和HTTP条件请求也不是新概念。本项目交付范围是MoonBit请求/XML核心及Node文件authoring宿主，区分日历服务与通用文件访问；不把整个DAV生态说成空白，也未声称基于moon-ical扩展。
+固定来源与检索边界见DUPLICATION.md；没有声称生态空白、真实用户、上游认可或协议算法首创。
 
-## 原创、复用与差异
-原创实现/参考来源/第三方材料许可按 README、DUPLICATION 与仓库来源说明披露；不将既有协议、算法、词库或规范发明归于本项目。
-moon-ical 的 CalDAV 服务端已存在；本项目是通用 WebDAV authoring 客户端，文件锁/传输工作流不同于日历服务端。不称整个 DAV 生态空白。
-比较项目链接单列于 DUPLICATION.md，不作为本项目提交地址。检索范围不含完整未公开报名表，不能保证无重叠。
+## 可复现证据
+准备README/WORKFLOW中的依赖，构建后运行node examples/run-conflict-workflow.mjs。
+未经修改的WsgiDAV4.3.5独立服务器、临时共享目录、两个客户端，通过校验临时证书的本机HTTPS和Digest运行。输入为原创配置示例，不是企业文档平台采用或完整同步验收。
+JS/Wasm-GC各23项核心测试、13组authoring/Digest/stream检查、既有独立WsgiDAV对照、引擎与CLI通过；新主例保存初始、被拒绝、冲突后及显式解决后的文件和哈希。旧对照中的WsgiDAV propname限制仍保留，不冒充所有WebDAV扩展兼容。
+report.json包含staleWriteStatus=412、winnerPreserved=true、explicitResolutionWritten=true、filesystemBytesMatch=true和五份文件的SHA-256。
 
-## 边界与剩余计划
-不提供完整 CalDAV/CardDAV 客户端或所有服务器扩展，兼容性以固定服务端和已测请求为限。
-没有已有企业文档平台使用方证明；条件请求不能推导全局同步冲突已经解决。
-剩余计划：由对接团队核对真实表单链接、公开本轮对应提交及确认选题/换题流程；按实际接入输入补验证，避免以更多规则、测试数量或改名替代用途证据。
-交付：MoonBit 库、限定宿主入口、可运行任务、源码/来源说明及分层验证证据；不承诺自动通过初审。
+## 边界和交付
+If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。
+交付MoonBit核心、Node宿主、可运行任务及原始证据；功能不等于业务采用，测试通过不代表初审通过。
+由对接团队将公开源码、报名表正文和附件同步为同一版本，避免沿用超过实现范围的旧承诺。

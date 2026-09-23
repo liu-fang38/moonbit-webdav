@@ -1,14 +1,12 @@
 {
-  "title": "读取远端资源的条件写入元数据",
-  "scope": "离线合成 PROPFIND 响应；实际锁/流式上传的回环验证另列，本例不发网络请求。",
+  "title": "WebDAV 条件写入与冲突处理客户端",
+  "scope": "未经修改的WsgiDAV4.3.5独立服务器、临时共享目录、两个客户端，通过校验临时证书的本机HTTPS和Digest运行。输入为原创配置示例，不是企业文档平台采用或完整同步验收。",
   "steps": [
     {
       "args": [
-        "tools/cli.mjs",
-        "--file",
-        "examples/use-case/multistatus.xml"
+        "examples/run-conflict-workflow.mjs"
       ]
     }
   ],
-  "expected": "解析 href、42 字节长度、ETag v1；不把属性响应当作成功完成条件写入的证明。"
+  "expected": "report.json包含staleWriteStatus=412、winnerPreserved=true、explicitResolutionWritten=true、filesystemBytesMatch=true和五份文件的SHA-256。"
 }
