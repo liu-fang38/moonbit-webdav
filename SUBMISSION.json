@@ -4,7 +4,7 @@
   "module": "liu-fang38/webdav",
   "version": "0.4.1",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
-  "status": "审核结果未知；本轮预防性本地整改",
+  "status": "审核结果未知；本地工程复核完成，待团队同步",
   "remainingRisk": "If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。",
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
@@ -16,5 +16,13 @@
     "date": "2026-09-22",
     "head": "6a780dd19fbda252342cb8773caa88bf57a3023a",
     "notCurrentPublicHeadClaim": true
-  }
+  },
+  "originalSubmission": "webdav",
+  "license": "MIT",
+  "acceptance": "not established",
+  "remoteCIRunByThisTask": false,
+  "currentValidation": "evidence/scope-20260927/REVIEW.json",
+  "currentEvidence": "evidence/scope-20260927/REVIEW.json",
+  "metadataReviewedOn": "2026-09-27",
+  "currentEvidenceScope": "Existing DAV semantic core retained;15 core files unchanged,5 runtime fingerprints and5 workflow files match independent WsgiDAV evidence"
 }
