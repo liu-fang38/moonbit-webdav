@@ -5,13 +5,13 @@
   "version": "0.4.1",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
   "status": "审核结果未知；本地工程复核完成，待团队同步",
-  "remainingRisk": "If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。",
+  "remainingRisk": "只核验一个独立服务器；非目录事务、自动合并或完整云盘，未重复宣称第二服务器通过",
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
   "localChangesPublished": false,
   "proposalLines": 25,
-  "useCase": "两个客户端编辑同一个远程配置文件时，用强ETag的If-Match条件拒绝过期写入，保留已写入版本；调用方明确解决冲突后，再针对当前ETag提交。",
-  "diff": "已有moon-ical的CalDAV服务端，通用WebDAV客户端和HTTP条件请求也不是新概念。本项目交付范围是MoonBit请求/XML核心及Node文件authoring宿主，区分日历服务与通用文件访问；不把整个DAV生态说成空白，也未声称基于moon-ical扩展。",
+  "useCase": "处理DAV多状态/XML/锁请求，并让两个客户端用强ETag完成单资源条件更新",
+  "diff": "412是标准HTTP行为；moon-ical、OpenDAL、成熟JS客户端分别比较，不声称并发算法创新",
   "historicalAnonymousClone": {
     "date": "2026-09-22",
     "head": "6a780dd19fbda252342cb8773caa88bf57a3023a",
@@ -24,5 +24,6 @@
   "currentValidation": "evidence/scope-20260927/REVIEW.json",
   "currentEvidence": "evidence/scope-20260927/REVIEW.json",
   "metadataReviewedOn": "2026-09-27",
-  "currentEvidenceScope": "Existing DAV semantic core retained;15 core files unchanged,5 runtime fingerprints and5 workflow files match independent WsgiDAV evidence"
+  "currentEvidenceScope": "Existing DAV semantic core retained;15 core files unchanged,5 runtime fingerprints and5 workflow files match independent WsgiDAV evidence",
+  "reviewDecision": "保留协议语义核心"
 }
