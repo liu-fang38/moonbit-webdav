@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-27",
+  "version": "0.4.1",
+  "runtimeChanges": false,
+  "originalValidationCommit": "d182215",
+  "unchangedCoreFiles": [
+    "authoring.mbt",
+    "authoring_test.mbt",
+    "cmd/main/main.mbt",
+    "cmd/main/pkg.generated.mbti",
+    "cmd/web/authoring.mbt",
+    "cmd/web/client.mbt",
+    "cmd/web/main.mbt",
+    "core_test.mbt",
+    "dav.mbt",
+    "moon.mod",
+    "moon.pkg",
+    "multistatus.mbt",
+    "pkg.generated.mbti",
+    "usability.mbt",
+    "xml.mbt"
+  ],
+  "sourceChecks": [
+    {
+      "file": "web/engine.mjs",
+      "expected": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6",
+      "matched": "raw"
+    },
+    {
+      "file": "tools/client.mjs",
+      "expected": "bb36759a88c648571448db2d2524a12ad6906dafe3bad5e08ca2ca00e1cf5d75",
+      "matched": "raw"
+    },
+    {
+      "file": "examples/run-conflict-workflow.mjs",
+      "expected": "566f1babf8ef339ea2168caa7b8b100374e25ac7f7e39445c0c9057fef343f7f",
+      "matched": "raw"
+    },
+    {
+      "file": "tools/wsgidav-harness.mjs",
+      "expected": "a22639c34b4d3a915590be4a0a7f3e0f8d3f488c04fc1dcebd764a3f158ebb52",
+      "matched": "raw"
+    },
+    {
+      "file": "tools/wsgidav-reference.py",
+      "expected": "503f0b73f985d0b70182c3fe59ea2316a8be9526e5efc01a9f3334a27c053652",
+      "matched": "raw"
+    }
+  ],
+  "verifiedWorkflowFiles": 5,
+  "newRuntimeTestsRun": false,
+  "publicOrProductionClaimsAdded": false
+}

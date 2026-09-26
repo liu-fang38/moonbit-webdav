@@ -1,4 +1,4 @@
-# WebDAV 条件写入与冲突处理客户端
+# MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主）
 
 **本项目仓库：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)**
 
@@ -41,3 +41,5 @@ If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目�
 [DUPLICATION](DUPLICATION.md)保留固定来源及检索范围。没有查到相同关键词不构成生态空白证明，也没有编造使用方或上游认可。当前 [申报草稿](PROPOSAL.md)与 [复核说明](REVIEW-RESPONSE.md)对齐实际流程；[此前材料](docs/before-workflow/README.md)仅为历史。
 
 CI固定的编译器与标准库版本见 [TOOLCHAIN.md](TOOLCHAIN.md)；升级时需同时核对生成产物。
+
+2026-09-27：[重新审视](REASSESSMENT.md)将主贡献明确为DAV语义核心；源码和原验证指纹相符，保留0.4.1，无额外运行时改动。仅一个独立服务器的互通证据，不扩张成熟度。

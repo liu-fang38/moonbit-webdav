@@ -1,4 +1,4 @@
-# WebDAV 条件写入与冲突处理客户端 · 修订申报草稿
+# MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主） · 修订申报草稿
 
 本项目仓库：https://github.com/liu-fang38/moonbit-webdav
 模块 / 本地版本：`liu-fang38/webdav` / `0.4.1`；MIT。

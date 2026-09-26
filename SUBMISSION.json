@@ -1,6 +1,6 @@
 {
   "project": "webdav",
-  "title": "WebDAV 条件写入与冲突处理客户端",
+  "title": "MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主）",
   "module": "liu-fang38/webdav",
   "version": "0.4.1",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",

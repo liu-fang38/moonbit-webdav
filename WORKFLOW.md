@@ -1,4 +1,4 @@
-# WebDAV 条件写入与冲突处理客户端：当前流程与边界
+# MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主）：当前流程与边界
 
 本地版本0.4.1；源码中的网络、存储编排在Node宿主。先按README构建实际引擎，执行 `node examples/run-conflict-workflow.mjs`。
 
