@@ -2,14 +2,14 @@
   "project": "webdav",
   "title": "MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主）",
   "module": "liu-fang38/webdav",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
   "status": "审核结果未知；本地工程复核完成，待团队同步",
   "remainingRisk": "只核验一个独立服务器；非目录事务、自动合并或完整云盘，未重复宣称第二服务器通过",
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
   "localChangesPublished": false,
-  "proposalLines": 25,
+  "proposalLines": 27,
   "useCase": "处理DAV多状态/XML/锁请求，并让两个客户端用强ETag完成单资源条件更新",
   "diff": "412是标准HTTP行为；moon-ical、OpenDAL、成熟JS客户端分别比较，不声称并发算法创新",
   "historicalAnonymousClone": {
@@ -21,9 +21,10 @@
   "license": "MIT",
   "acceptance": "not established",
   "remoteCIRunByThisTask": false,
-  "currentValidation": "evidence/scope-20260927/REVIEW.json",
-  "currentEvidence": "evidence/scope-20260927/REVIEW.json",
+  "currentValidation": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
+  "currentEvidence": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
   "metadataReviewedOn": "2026-09-27",
-  "currentEvidenceScope": "Existing DAV semantic core retained;15 core files unchanged,5 runtime fingerprints and5 workflow files match independent WsgiDAV evidence",
-  "reviewDecision": "保留协议语义核心"
+  "currentEvidenceScope": "Node host DAV href identity repair; no MoonBit core/API/engine change; 12 identity,13 host and17 independent WsgiDAV groups passed",
+  "reviewDecision": "保留协议语义核心",
+  "previousEvidence": "evidence/scope-20260927/REVIEW.json"
 }

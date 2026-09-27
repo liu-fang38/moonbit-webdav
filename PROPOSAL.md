@@ -1,7 +1,7 @@
 # MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主） · 修订申报草稿
 
 本项目仓库：https://github.com/liu-fang38/moonbit-webdav
-模块 / 本地版本：`liu-fang38/webdav` / `0.4.1`；MIT。
+模块 / 本地版本：`liu-fang38/webdav` / `0.4.2`；MIT。
 状态：审核结果未知，本轮预防性本地整改，未推送、发布或提交表单。
 
 ## 任务与实现
@@ -23,3 +23,5 @@ report.json包含staleWriteStatus=412、winnerPreserved=true、explicitResolutio
 If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目录事务、分布式锁服务、离线合并算法或同步调度器。示例中的内容合并是明确写出的样例决策，不会自动理解业务冲突；生产使用方和更多服务端仍未验证。
 交付MoonBit核心、Node宿主、可运行任务及原始证据；功能不等于业务采用，测试通过不代表初审通过。
 由对接团队将公开源码、报名表正文和附件同步为同一版本，避免沿用超过实现范围的旧承诺。
+
+0.4.2 修复 Node 宿主 `stat/list` 对编码路径分隔符的错误识别；12 组身份检查、13 组客户端检查及17组独立 WsgiDAV 互通检查通过。协议范围、拒绝行为及本轮证据见 [HREF-IDENTITY](HREF-IDENTITY.md)。

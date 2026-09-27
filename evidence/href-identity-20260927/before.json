@@ -1,0 +1,10 @@
+{
+  "baselineCommit": "8f90de85d35420a366e10c52f76f34244c84d717",
+  "probe": "work/quality-parity-20260927/systems/webdav-href-probe.mjs",
+  "requestPath": "/a/b",
+  "responseHref": "/a%2Fb",
+  "resultPath": "/a/b",
+  "isCollection": true,
+  "returnedForeignSegmentIdentityAsRequest": true,
+  "source": "Actual pre-fix local HTTP probe output"
+}

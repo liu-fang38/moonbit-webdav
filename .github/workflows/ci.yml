@@ -32,6 +32,7 @@ jobs:
       - run: node tools/test-digest.mjs
       - run: node tools/test-xml-reference.mjs
       - run: node tools/test-authoring-client.mjs
+      - run: node tools/test-href-identity.mjs --evidence evidence/href-identity-ci.json
       - run: python -m pip install -r tools/workflow-requirements.txt
       - run: node examples/run-conflict-workflow.mjs
       - run: node tools/test-cli.mjs

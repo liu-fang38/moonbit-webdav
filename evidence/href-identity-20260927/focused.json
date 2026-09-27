@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-27T06:54:02.825Z",
+  "node": "v24.11.0",
+  "passed": 12,
+  "results": [
+    {
+      "name": "encoded slash cannot impersonate two path segments",
+      "passed": true
+    },
+    {
+      "name": "listing fails rather than returning an aliased child path",
+      "passed": true
+    },
+    {
+      "name": "ordinary, absolute and unreserved-equivalent hrefs match",
+      "passed": true
+    },
+    {
+      "name": "encoded literal percent is decoded once and reusable",
+      "passed": true
+    },
+    {
+      "name": "UTF8, space and encoded reserved filename bytes round-trip",
+      "passed": true
+    },
+    {
+      "name": "literal reserved punctuation is not confused with an escaped octet",
+      "passed": true
+    },
+    {
+      "name": "foreign origin, credentials, query and fragment are rejected",
+      "passed": true
+    },
+    {
+      "name": "malformed percent and UTF8 encodings are rejected",
+      "passed": true
+    },
+    {
+      "name": "URL parser repair cannot change a returned resource identity",
+      "passed": true
+    },
+    {
+      "name": "collection slash and unreserved self href keep list semantics",
+      "passed": true
+    },
+    {
+      "name": "unrelated representable resource is not returned as requested",
+      "passed": true
+    },
+    {
+      "name": "low-level propfind preserves an otherwise unrepresentable raw href",
+      "passed": true
+    }
+  ],
+  "server": "purpose-built loopback HTTP fixture",
+  "independentServer": false,
+  "standard": "RFC3986 sections 2.2, 2.3, 2.4",
+  "sourceSha256": {
+    "tools/client.mjs": "9b2212f1a37cb04b9b40fb9e160c6f132bbbd499c6e9317be3a0d7e9605dd7ac",
+    "tools/test-href-identity.mjs": "60d3307f8661edab8430a0fb36b01073621ae69fd969c48996c9f823abfb5982",
+    "web/engine.mjs": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6"
+  }
+}

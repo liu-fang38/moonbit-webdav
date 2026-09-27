@@ -2,7 +2,7 @@
 
 **本项目仓库：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)**
 
-模块 `liu-fang38/webdav`，本地 **0.4.1**，MIT。本轮为预防性整改；审核结果未知，没有把本地修订写成已通过。未推送、发布或提交表单。
+模块 `liu-fang38/webdav`，本地 **0.4.2**，MIT。本轮为预防性整改；审核结果未知，没有把本地修订写成已通过。未推送、发布或提交表单。
 
 ## 具体任务
 
@@ -43,3 +43,5 @@ If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目�
 CI固定的编译器与标准库版本见 [TOOLCHAIN.md](TOOLCHAIN.md)；升级时需同时核对生成产物。
 
 2026-09-27：[重新审视](REASSESSMENT.md)将主贡献明确为DAV语义核心；源码和原验证指纹相符，保留0.4.1，无额外运行时改动。仅一个独立服务器的互通证据，不扩张成熟度。
+
+0.4.2 修复 Node 宿主 `stat/list` 对编码路径分隔符的错误识别；12 组身份检查、13 组客户端检查及17组独立 WsgiDAV 互通检查通过。协议范围、拒绝行为及本轮证据见 [HREF-IDENTITY](HREF-IDENTITY.md)。

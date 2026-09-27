@@ -1,0 +1,66 @@
+{
+  "date": "2026-09-27T06:54:03.421Z",
+  "node": "v24.11.0",
+  "passed": 13,
+  "results": [
+    {
+      "name": "Digest stale retry, independent SHA256 validation, rspauth and nextnonce cache",
+      "passed": true
+    },
+    {
+      "name": "standards-conforming unauthenticated HEAD challenge works",
+      "passed": true
+    },
+    {
+      "name": "wrong password and forever-stale challenges have bounded retries",
+      "passed": true
+    },
+    {
+      "name": "bad server proof and unsupported stream auth-int fail closed",
+      "passed": true
+    },
+    {
+      "name": "stream response retains deadline until body completion",
+      "passed": true
+    },
+    {
+      "name": "stream cancellation and caller destruction reject completion",
+      "passed": true
+    },
+    {
+      "name": "stream uploads enforce exact lengths and byte chunks",
+      "passed": true
+    },
+    {
+      "name": "early 401 disposes stalled source and replays a fresh stream",
+      "passed": true
+    },
+    {
+      "name": "early successful response cannot hide incomplete upload",
+      "passed": true
+    },
+    {
+      "name": "stalled upload timeout and abort release source",
+      "passed": true
+    },
+    {
+      "name": "standard propname body and rich response use scalar optional fields",
+      "passed": true
+    },
+    {
+      "name": "invalid UTF8 XML, incorrect status and mismatched lock token reject",
+      "passed": true
+    },
+    {
+      "name": "invalid stream, header and lock options never reach server",
+      "passed": true
+    }
+  ],
+  "independentServer": false,
+  "sourceSha256": {
+    "tools/client.mjs": "9b2212f1a37cb04b9b40fb9e160c6f132bbbd499c6e9317be3a0d7e9605dd7ac",
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "tools/test-authoring-client.mjs": "1736b6df5de9b63b1b88a52ee97943b9aea8e39e46887dada013705069fd6a20",
+    "web/engine.mjs": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6"
+  }
+}

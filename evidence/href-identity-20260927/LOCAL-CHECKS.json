@@ -1,0 +1,28 @@
+{
+  "date": "2026-09-27T06:58:01.255249+00:00",
+  "scope": "Node host DAV href identity repair; no MoonBit core/API/engine change",
+  "checks": {
+    "hrefIdentityGroups": 12,
+    "authoringGroups": 13,
+    "independentWsgiDavGroups": 17
+  },
+  "reference": "WsgiDAV 4.3.5",
+  "priorEvidence": "evidence/scope-20260927/REVIEW.json",
+  "remoteCIRun": false,
+  "sourceSha256": {
+    "tools/client.mjs": "9b2212f1a37cb04b9b40fb9e160c6f132bbbd499c6e9317be3a0d7e9605dd7ac",
+    "tools/test-href-identity.mjs": "60d3307f8661edab8430a0fb36b01073621ae69fd969c48996c9f823abfb5982",
+    "tools/test-authoring-client.mjs": "1736b6df5de9b63b1b88a52ee97943b9aea8e39e46887dada013705069fd6a20",
+    "tools/test-wsgidav.mjs": "c565dd62aa0c61cd85a5ea0f122812128de2f7bf2ad49cdd79d743dade81a651",
+    "tools/digest.mjs": "eae469c71b03b809e9d27129b5cea204798ebb3d08219bd8255f4215f694c8cd",
+    "web/engine.mjs": "d3de138602ec3005e25a6d7fc33d70ddf742d3201b5ab9a65daa4c4a8aeb73f6",
+    "pkg.generated.mbti": "aea24cad3affec731be3f1bd2c7befd179504cf5c1675d7369c283e4278d9e77",
+    "moon.mod": "62c7fb607ba4fb1621899f4914ccee32b9af3a854024a512bd728e15e3f36389",
+    ".github/workflows/ci.yml": "e5194f3e2daaa1086fa40c75d7e84506e15577abe83123ca5ff3202131706979"
+  },
+  "limits": [
+    "Raw host path API rejects unrepresentable hrefs; propfind retains raw hrefs",
+    "Only WsgiDAV independent server was exercised",
+    "Controlled URI fixtures are not independent server evidence"
+  ]
+}

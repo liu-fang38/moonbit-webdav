@@ -10,6 +10,11 @@ function checked(value,json=false){if(value.startsWith('ERROR:'))throw Error(val
 function positive(value,name,zero=false){if(!Number.isSafeInteger(value)||value<(zero?0:1))throw TypeError(`Invalid ${name}`);return value;}
 function mergeHeaders(...groups){const out={};for(const group of groups)for(const [name,value] of Object.entries(group??{})){const key=name.toLowerCase();if(Object.hasOwn(out,key))throw TypeError(`Duplicate header: ${name}`);if(typeof value!=='string')throw TypeError('Header values must be strings');out[key]=value;}return out;}
 const decode=response=>new TextDecoder('utf-8',{fatal:true}).decode(response.body);
+// RFC 3986: only unreserved escapes are interchangeable with literal characters.
+const normalizeUriPath=path=>path.replace(/%[0-9a-f]{2}/gi,escape=>{
+  const character=String.fromCharCode(parseInt(escape.slice(1),16));
+  return /^[A-Za-z0-9._~-]$/.test(character)?character:escape.toUpperCase();
+});
 export class DavHttpError extends Error{constructor(response){super(`WebDAV HTTP ${response.status}`);this.name='DavHttpError';this.response=response;}}
 export class DavProtocolError extends Error{constructor(message,response){super(message);this.name='DavProtocolError';this.response=response;}}
 export class DavMultiStatusError extends Error{constructor(response,failures){super('WebDAV operation contains failed resources or properties');this.name='DavMultiStatusError';this.response=response;this.failures=failures;}}
@@ -195,7 +200,21 @@ export class WebDavClient {
     const lock=locks.find(l=>l.token===token);if(!lock)throw new DavProtocolError('Lock token is absent from discovery body',response);
     return {...response,token,lock,locks};
   }
-  #pathFromHref(href){const value=new URL(href,this.#origin);if(value.origin!==this.#origin.origin||value.search||value.hash)throw Error('Invalid or foreign DAV href');return decodeURIComponent(value.pathname);}
+  #pathFromHref(href){
+    // URL parsing must not silently repair whitespace or backslash separators.
+    if(typeof href!=='string'||/[\\\x00-\x20\x7f]/.test(href))throw new DavProtocolError('Invalid DAV href');
+    const value=new URL(href,this.#origin);
+    if(value.origin!==this.#origin.origin||value.username||value.password||value.search||value.hash)throw new DavProtocolError('Invalid or foreign DAV href');
+    let raw,encoded;
+    try{raw=decodeURIComponent(value.pathname);encoded=checked(core.encode_path(raw));}
+    catch{throw new DavProtocolError('Invalid DAV href path encoding');}
+    // Public host methods take raw paths. A slash within one URI segment cannot
+    // be represented by that API; returning it as a separator would alias a
+    // different resource. Also reject other reserved-character changes that
+    // cannot round-trip through our request encoder. propfind retains raw hrefs.
+    if(normalizeUriPath(encoded)!==normalizeUriPath(value.pathname))throw new DavProtocolError('DAV href cannot be represented without changing resource identity');
+    return raw;
+  }
   #info(resource){
     const property=name=>resource.properties.find(p=>p.uri==='DAV:'&&p.name===name&&p.status>=200&&p.status<300)?.value;
     const rawLength=property('getcontentlength');let size;

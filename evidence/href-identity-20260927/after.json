@@ -1,0 +1,6 @@
+{
+  "requestPath": "/a/b",
+  "responseHref": "/a%2Fb",
+  "error": "DAV href cannot be represented without changing resource identity",
+  "returnedForeignSegmentIdentityAsRequest": false
+}

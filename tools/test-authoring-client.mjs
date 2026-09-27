@@ -6,6 +6,8 @@ import {Readable} from 'node:stream';
 import {readFile,writeFile} from 'node:fs/promises';
 import {WebDavClient,DavHttpError,DavProtocolError,DavMultiStatusError} from './client.mjs';
 import {challenges} from './digest.mjs';
+const args=process.argv.slice(2);
+if(args.length&&!(args.length===2&&args[0]==='--evidence'))throw Error('Usage: node tools/test-authoring-client.mjs [--evidence FILE]');
 
 const seen=[];const hash=s=>createHash('sha256').update(s).digest('hex');
 const challenge=(res,nonce='first',extra='')=>{res.writeHead(401,{'WWW-Authenticate':`Digest realm="test", nonce="${nonce}", algorithm=SHA-256, qop="auth"${extra}`});res.end();};
@@ -129,5 +131,5 @@ try{
   assert.deepEqual(errors,[]);
 }finally{server.closeAllConnections();await new Promise(resolve=>server.close(resolve));}
 const sourceSha256={};for(const file of ['tools/client.mjs','tools/digest.mjs','tools/test-authoring-client.mjs','web/engine.mjs'])sourceSha256[file]=hash(await readFile(new URL('../'+file,import.meta.url)));
-await writeFile(new URL('../evidence/authoring-client-validation.json',import.meta.url),JSON.stringify({date:new Date().toISOString(),node:process.version,passed:results.length,results,independentServer:false,sourceSha256},null,2)+'\n');
+await writeFile(args[1]??new URL('../evidence/authoring-client-validation.json',import.meta.url),JSON.stringify({date:new Date().toISOString(),node:process.version,passed:results.length,results,independentServer:false,sourceSha256},null,2)+'\n');
 console.log(`${results.length} authoring/Digest/stream failure fixture groups passed`);

@@ -1,6 +1,6 @@
 # MoonBit WebDAV 请求与响应语义库（含 Node 条件更新宿主）：当前流程与边界
 
-本地版本0.4.1；源码中的网络、存储编排在Node宿主。先按README构建实际引擎，执行 `node examples/run-conflict-workflow.mjs`。
+本地版本0.4.2；源码中的网络、存储编排在Node宿主。先按README构建实际引擎，执行 `node examples/run-conflict-workflow.mjs`。
 
 两个客户端读取相同初始文件/ETag。Alice写入新内容，Bob用旧ETag提交不同内容得到412；再次读取证明Alice内容未被覆盖。样例明确保留Alice内容并补Bob的备注，再用当前ETag写入；GET结果与独立服务端文件系统字节一致。
 
@@ -30,3 +30,5 @@ harness要求WsgiDAV4.3.5；本轮Python3.14、cheroot11.1.2、cryptography50.0.
 样例内容在每次成功编辑时变化了字节长度，避免把测试结论依赖于文件系统mtime精度；客户端的普遍正确性仍依赖服务端强ETag兑现其协议语义。当前检查不证明全目录同步、多文件事务或所有后端的ETag质量。
 
 除新主例，本轮重跑13组authoring客户端检查和既有独立WsgiDAV流程，覆盖已有锁、HTTPS和流式行为。WsgiDAV propname行为差异仍按原报告列为限制，未通过修改请求迎合参考实现。
+
+0.4.2 修复 Node 宿主 `stat/list` 对编码路径分隔符的错误识别；12 组身份检查、13 组客户端检查及17组独立 WsgiDAV 互通检查通过。协议范围、拒绝行为及本轮证据见 [HREF-IDENTITY](HREF-IDENTITY.md)。
