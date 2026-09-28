@@ -2,7 +2,7 @@
 
 **本项目仓库：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav)**
 
-模块 `liu-fang38/webdav`，本地 **0.4.2**，MIT。本轮为预防性整改；审核结果未知，没有把本地修订写成已通过。未推送、发布或提交表单。
+模块 `liu-fang38/webdav`，本地 **0.4.2**，MIT。本轮为预防性整改；审核结果未知，没有把本地修订写成已通过。Mooncakes 已出现 0.4.2 版号；本次文档和表单状态仍须核对。
 
 ## 具体任务
 
@@ -64,4 +64,4 @@ moon package
 
 本地核验：JS/Wasm-GC 测试、150 个 XML 向量和冲突更新工作流通过。 `moon package` 已完成离线打包预检，它不等于已发布到 Mooncakes。
 
-公开交付（2026-09-28 核对）：当日 [https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav) 可匿名读取 Git HEAD，Mooncakes 在线版本为 `0.4.0`；此处源码版本 `0.4.2` 仍需由申报人同步到公开仓库，检查新提交的 GitHub Actions，再由对应账号发布 Mooncakes 新版。相关远端 CI 与赛事结果仍需以实际记录核对。项目许可见 [LICENSE](LICENSE)；如使用第三方材料，其来源和许可见仓内相应说明。
+公开交付（2026-09-29 只读核对）：[https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav) 的公开 Git HEAD 是本地提交的祖先；Mooncakes 最新版号 `0.4.2` 与本地版号相同。版号不证明包内容与本次本地提交一致；当前 README、申报书、远端 CI 与报名表仍须对照公开提交核实。项目许可见 [LICENSE](LICENSE)；第三方来源和许可见仓内说明。
