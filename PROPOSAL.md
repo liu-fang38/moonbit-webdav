@@ -25,3 +25,5 @@ If-Match保护单个资源且依赖服务器正确处理强ETag；没有全目�
 由对接团队将公开源码、报名表正文和附件同步为同一版本，避免沿用超过实现范围的旧承诺。
 
 0.4.2 修复 Node 宿主 `stat/list` 对编码路径分隔符的错误识别；12 组身份检查、13 组客户端检查及17组独立 WsgiDAV 互通检查通过。协议范围、拒绝行为及本轮证据见 [HREF-IDENTITY](HREF-IDENTITY.md)。
+
+**验收复现与交付状态（2026-09-28 本地）**：以 moonc 0.10.14+7d59c7ec9 通过检查、JS/Wasm-GC 测试、构建、最小样例和离线 `moon package`；公开 Git HEAD 当日可匿名读取，Mooncakes 在线版 `0.4.0` 落后于本地 `0.4.2`；新版推送、远端 CI 和发布待核对。命令与能力边界见 [README](README.md)，自动检查见 [CI](.github/workflows/ci.yml)；本地通过不代表赛事审核通过。

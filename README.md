@@ -45,3 +45,19 @@ CI固定的编译器与标准库版本见 [TOOLCHAIN.md](TOOLCHAIN.md)；升级�
 2026-09-27：[重新审视](REASSESSMENT.md)将主贡献明确为DAV语义核心；源码和原验证指纹相符，保留0.4.1，无额外运行时改动。仅一个独立服务器的互通证据，不扩张成熟度。
 
 0.4.2 修复 Node 宿主 `stat/list` 对编码路径分隔符的错误识别；12 组身份检查、13 组客户端检查及17组独立 WsgiDAV 互通检查通过。协议范围、拒绝行为及本轮证据见 [HREF-IDENTITY](HREF-IDENTITY.md)。
+
+## 本地验收与公开交付（2026-09-28）
+
+核心实现使用 MoonBit；[固定编译器](.moonbit-version)为 `moonc 0.10.14+7d59c7ec9`。先按本文安装宿主依赖、运行 `moon update`，再从仓库根目录执行以下与 [CI](.github/workflows/ci.yml) 对齐的检查；可运行任务和适用边界见本文前面的示例与说明。
+
+```sh
+moon check
+moon test --target wasm-gc
+moon test --target js
+moon build --target js
+moon package
+```
+
+本地核验：JS/Wasm-GC 测试、150 个 XML 向量和冲突更新工作流通过。 `moon package` 已完成离线打包预检，它不等于已发布到 Mooncakes。
+
+公开交付（2026-09-28 核对）：当日 [https://github.com/liu-fang38/moonbit-webdav](https://github.com/liu-fang38/moonbit-webdav) 可匿名读取 Git HEAD，Mooncakes 在线版本为 `0.4.0`；此处源码版本 `0.4.2` 仍需由团队同步到公开仓库，检查新提交的 GitHub Actions，再由对应账号发布 Mooncakes 新版。相关远端 CI 与赛事结果仍需以实际记录核对。项目许可见 [LICENSE](LICENSE)；如使用第三方材料，其来源和许可见仓内相应说明。
