@@ -9,7 +9,7 @@
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
   "localChangesPublished": false,
-  "proposalLines": 27,
+  "proposalLines": 29,
   "useCase": "处理DAV多状态/XML/锁请求，并让两个客户端用强ETag完成单资源条件更新",
   "diff": "412是标准HTTP行为；moon-ical、OpenDAL、成熟JS客户端分别比较，不声称并发算法创新",
   "historicalAnonymousClone": {
@@ -23,7 +23,7 @@
   "remoteCIRunByThisTask": false,
   "currentValidation": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
   "currentEvidence": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
-  "metadataReviewedOn": "2026-09-27",
+  "metadataReviewedOn": "2026-09-28",
   "currentEvidenceScope": "Node host DAV href identity repair; no MoonBit core/API/engine change; 12 identity,13 host and17 independent WsgiDAV groups passed",
   "reviewDecision": "保留协议语义核心",
   "previousEvidence": "evidence/scope-20260927/REVIEW.json"
