@@ -16,4 +16,4 @@ CI先执行 `moon update` 初始化注册表及解析依赖，再进行fmt/info/
 
 升级时先修改版本文件，在独立目录执行fmt/info/check和受影响测试，更新生成API与编译引擎，再一起提交。不要通过删除确定性检查掩盖版本引起的差异。Node/Python、操作系统和外部服务仍有各自环境范围；固定MoonBit不意味着所有依赖完全冻结。
 
-当前本地验收（2026-09-28）：使用 pin 指定的 0.10.14+7d59c7ec9 完成 moon update、moon fmt、moon info、verify.ps1（check、JS/Wasm-GC tests、JS build、CLI sample及领域检查）。验证输出仍有非阻断 warning 0079（隐式派生 trait 方法提升）；当前 CI 不会将 warning 升级为错误。GitHub Actions远端运行和Mooncakes发布仍待外部确认。
+当前本地验收（2026-09-28，严格检查）：固定 moonc 0.10.14+7d59c7ec9。本轮补齐派生方法显式声明及未使用导入，`moon check --deny-warn`、JS/Wasm-GC `moon test --deny-warn` 和 JS `moon build --deny-warn` 本地通过；CI 与 `verify.ps1` 已启用同样的严格参数。此前 `verify.ps1` 的 CLI/领域检查结果仍按原记录，本轮没有以编译检查代替全部宿主复测。GitHub Actions 远端运行和 Mooncakes 新版发布仍待确认。

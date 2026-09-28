@@ -42,6 +42,7 @@ pub fn unlock_request(String, String) -> Request raise DavError
 pub suberror DavError {
   Invalid(String)
 } derive(@debug.Debug)
+pub fn DavError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 pub(all) struct DavResponse {
@@ -52,6 +53,10 @@ pub(all) struct DavResponse {
   location : String?
   errors : Array[XmlElement]
 } derive(Eq, ToJson, @debug.Debug)
+pub fn DavResponse::equal(Self, Self) -> Bool
+pub fn DavResponse::not_equal(Self, Self) -> Bool
+pub fn DavResponse::to_json(Self) -> Json
+pub fn DavResponse::to_repr(Self) -> @debug.Repr
 
 pub(all) struct LockInfo {
   token : String?
@@ -61,6 +66,10 @@ pub(all) struct LockInfo {
   depth : String
   timeout : String?
 } derive(Eq, ToJson, @debug.Debug)
+pub fn LockInfo::equal(Self, Self) -> Bool
+pub fn LockInfo::not_equal(Self, Self) -> Bool
+pub fn LockInfo::to_json(Self) -> Json
+pub fn LockInfo::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Property {
   uri : String
@@ -68,6 +77,10 @@ pub(all) struct Property {
   value : String
   status : Int
 } derive(Eq, ToJson, @debug.Debug)
+pub fn Property::equal(Self, Self) -> Bool
+pub fn Property::not_equal(Self, Self) -> Bool
+pub fn Property::to_json(Self) -> Json
+pub fn Property::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Request {
   verb : String
@@ -75,23 +88,39 @@ pub(all) struct Request {
   headers : Map[String, String]
   body : String
 } derive(Eq, ToJson, @debug.Debug)
+pub fn Request::equal(Self, Self) -> Bool
+pub fn Request::not_equal(Self, Self) -> Bool
+pub fn Request::to_json(Self) -> Json
+pub fn Request::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Resource {
   href : String
   status : Int?
   properties : Array[Property]
 } derive(Eq, ToJson, @debug.Debug)
+pub fn Resource::equal(Self, Self) -> Bool
+pub fn Resource::not_equal(Self, Self) -> Bool
+pub fn Resource::to_json(Self) -> Json
+pub fn Resource::to_repr(Self) -> @debug.Repr
 
 pub(all) struct XmlAttribute {
   uri : String
   name : String
   value : String
 } derive(Eq, ToJson, @debug.Debug)
+pub fn XmlAttribute::equal(Self, Self) -> Bool
+pub fn XmlAttribute::not_equal(Self, Self) -> Bool
+pub fn XmlAttribute::to_json(Self) -> Json
+pub fn XmlAttribute::to_repr(Self) -> @debug.Repr
 
 pub(all) enum XmlContent {
   Text(String)
   Element(XmlElement)
 } derive(Eq, ToJson, @debug.Debug)
+pub fn XmlContent::equal(Self, Self) -> Bool
+pub fn XmlContent::not_equal(Self, Self) -> Bool
+pub fn XmlContent::to_json(Self) -> Json
+pub fn XmlContent::to_repr(Self) -> @debug.Repr
 
 pub(all) struct XmlElement {
   uri : String
@@ -99,13 +128,21 @@ pub(all) struct XmlElement {
   attributes : Array[XmlAttribute]
   content : Array[XmlContent]
 } derive(Eq, ToJson, @debug.Debug)
+pub fn XmlElement::equal(Self, Self) -> Bool
+pub fn XmlElement::not_equal(Self, Self) -> Bool
 pub fn XmlElement::text_content(Self) -> String
+pub fn XmlElement::to_json(Self) -> Json
+pub fn XmlElement::to_repr(Self) -> @debug.Repr
 pub fn XmlElement::to_xml(Self) -> String raise DavError
 
 pub(all) struct XmlProperty {
   element : XmlElement
   status : Int
 } derive(Eq, ToJson, @debug.Debug)
+pub fn XmlProperty::equal(Self, Self) -> Bool
+pub fn XmlProperty::not_equal(Self, Self) -> Bool
+pub fn XmlProperty::to_json(Self) -> Json
+pub fn XmlProperty::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 
