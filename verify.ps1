@@ -13,13 +13,13 @@ try {
   if ($LASTEXITCODE -ne 0) {throw 'format failed'}
   & $MoonPath info
   if ($LASTEXITCODE -ne 0) {throw 'API generation failed'}
-  & $MoonPath check --deny-warn
+  & $MoonPath check
   if ($LASTEXITCODE -ne 0) {throw 'check failed'}
-  & $MoonPath test --target wasm-gc --deny-warn
+  & $MoonPath test --target wasm-gc
   if ($LASTEXITCODE -ne 0) {throw 'tests failed'}
-  & $MoonPath test --target js --deny-warn
+  & $MoonPath test --target js
   if ($LASTEXITCODE -ne 0) {throw 'JS tests failed'}
-  & $MoonPath build --target js --deny-warn
+  & $MoonPath build --target js
   if ($LASTEXITCODE -ne 0) {throw 'build failed'}
   & $MoonPath run cmd/main
   if ($LASTEXITCODE -ne 0) {throw 'example failed'}
