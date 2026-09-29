@@ -4,7 +4,7 @@
   "module": "liu-fang38/webdav",
   "version": "0.4.2",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
-  "status": "已公开对应版号及成功 CI；本轮材料仅本地修订，赛事审核结果待核实；换题是否批准待核实",
+  "status": "已公开对应版号及成功 CI；本轮材料仅本地修订，赛事审核结果待核实",
   "remainingRisk": "只核验一个独立服务器；非目录事务、自动合并或完整云盘，未重复宣称第二服务器通过",
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
