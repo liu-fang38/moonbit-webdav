@@ -4,7 +4,7 @@
   "module": "liu-fang38/webdav",
   "version": "0.4.2",
   "repository": "https://github.com/liu-fang38/moonbit-webdav",
-  "status": "审核结果未知；本地工程复核完成，待团队同步",
+  "status": "已公开对应版号及成功 CI；本轮材料仅本地修订，赛事审核结果待核实；换题是否批准待核实",
   "remainingRisk": "只核验一个独立服务器；非目录事务、自动合并或完整云盘，未重复宣称第二服务器通过",
   "actualUsersClaimed": false,
   "defaultBranch": "origin/main",
@@ -23,8 +23,17 @@
   "remoteCIRunByThisTask": false,
   "currentValidation": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
   "currentEvidence": "evidence/href-identity-20260927/LOCAL-CHECKS.json",
-  "metadataReviewedOn": "2026-09-28",
+  "metadataReviewedOn": "2026-09-29",
   "currentEvidenceScope": "Node host DAV href identity repair; no MoonBit core/API/engine change; 12 identity,13 host and17 independent WsgiDAV groups passed",
   "reviewDecision": "保留协议语义核心",
-  "previousEvidence": "evidence/scope-20260927/REVIEW.json"
+  "previousEvidence": "evidence/scope-20260927/REVIEW.json",
+  "publicRepositoryCreated": true,
+  "publicStatusCheckedOn": "2026-09-29",
+  "publishedVersion": "0.4.2",
+  "observedRemoteCiCommit": "573f982bb62138c75a82b03deb09cf40a8775071",
+  "observedRemoteCiUrl": "https://github.com/liu-fang38/moonbit-webdav/actions/runs/36436287134",
+  "observedRemoteCiConclusion": "success",
+  "currentCoreDiffersFromObservedCi": false,
+  "publishedCoreSourceComparedOn": "2026-09-29",
+  "publishedCoreSourceMatchesLocal": true
 }
